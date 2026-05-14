@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediFlow - Sistem RS Modern</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* === GLOBAL & ANIMASI === */
+        body { font-family: 'Quicksand', sans-serif; transition: background-color 0.5s ease; margin: 0; padding: 0; }
+        
+        /* Cegah Scroll Bocor saat Login */
+        body.login-mode { overflow: hidden; background-color: #0f3057; }
+        
+        .view-container { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { 
+            0% { opacity: 0; transform: scale(0.98) translateY(15px); } 
+            100% { opacity: 1; transform: scale(1) translateY(0); } 
+        }
+
+        /* === 1. LOGIN PAGE (Medical Premium Style) === */
+        /* Menggunakan Background Medis dengan Overlay Gradasi Biru */
+        .login-wrapper { 
+            position: relative; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: linear-gradient(135deg, rgba(15, 48, 87, 0.85) 0%, rgba(14, 165, 233, 0.6) 100%), 
+                        url('https://images.unsplash.com/photo-1581056771107-24ca5f033842?q=80&w=2000&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+        }
+        .login-box { 
+            background: rgba(255, 255, 255, 0.95); /* Glassmorphism effect */
+            backdrop-filter: blur(15px);
+            border-radius: 25px; 
+            padding: 50px 40px; 
+            width: 100%; 
+            max-width: 450px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2); 
+            z-index: 2; 
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .btn-login { 
+            background-color: #0ea5e9; 
+            color: white; 
+            border-radius: 12px; 
+            padding: 14px; 
+            font-weight: bold; 
+            width: 100%; 
+            border: none; 
+            transition: 0.3s; 
+            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+        }
+        .btn-login:hover { background-color: #0284c7; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4); }
+        .medical-icon-header { font-size: 3rem; color: #0ea5e9; margin-bottom: 10px; }
+
+        /* === 2. PASIEN (Teal / Ashley) === */
+        .bg-teal { background-color: #eef7f7; min-height: 100vh; overflow-x: hidden; }
+        .p-sidebar { width: 100px; height: 94vh; background: #88d1d1; position: fixed; left: 20px; top: 3vh; border-radius: 40px; text-align: center; padding: 40px 0; color: white; box-shadow: 10px 0 30px rgba(136, 209, 209, 0.3); z-index: 10; }
+        .p-main { margin-left: 140px; padding: 40px; margin-right: 360px; }
+        .p-right { width: 340px; height: 94vh; background: white; position: fixed; right: 20px; top: 3vh; border-radius: 40px; padding: 30px; box-shadow: -10px 0 30px rgba(0,0,0,0.02); overflow-y: auto; z-index: 10; }
+        .p-card { background: #88d1d1; border-radius: 40px; padding: 30px; color: white; }
+        .kk-card { border: 2px solid transparent; padding: 15px; border-radius: 20px; background: #f8fcfc; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .kk-card.active { border-color: #88d1d1; background: #eef7f7; }
+
+        /* === 3. DOKTER (Dark Blue / Alisha) === */
+        .bg-doc { background-color: #f4f6fc; min-height: 100vh; overflow-x: hidden; }
+        .d-sidebar { width: 90px; height: 96vh; background: #3b5998; position: fixed; left: 20px; top: 2vh; border-radius: 30px; text-align: center; padding: 30px 0; color: white; z-index: 10; }
+        .d-main { margin-left: 130px; padding: 40px; margin-right: 380px; }
+        .d-right { width: 360px; height: 96vh; background: transparent; position: fixed; right: 20px; top: 2vh; padding: 20px; overflow-y: auto; z-index: 10; }
+        .d-banner { background: #4a69bd; border-radius: 20px; padding: 40px; color: white; }
+        .d-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); margin-bottom: 20px; }
+
+        /* === 4. ADMIN (Light Blue / Crextio) === */
+        .bg-admin { background-color: #e6f0fa; min-height: 100vh; overflow-x: hidden; }
+        .a-container { padding: 40px; max-width: 1200px; margin: 0 auto; }
+        .a-topnav { background: white; border-radius: 30px; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+        .a-card { background: white; border-radius: 25px; padding: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.02); height: 100%; }
+        .bpjs-box { background: #f8fbff; border: 2px dashed #b8cde0; border-radius: 15px; padding: 20px; }
+    </style>
+</head>
+<body class="login-mode">
+
+    <div id="viewLogin" class="login-wrapper view-container">
+        <div class="login-box text-center">
+            <div class="medical-icon-header"><i class="bi bi-hospital"></i></div>
+            <h3 class="fw-bold mb-2" style="color: #0f3057;">MediFlow System</h3>
+            <p class="text-muted small mb-4">Portal Manajemen Kesehatan & Antrean RS</p>
+            
+            <div class="mb-3 text-start">
+                <label class="small fw-bold text-muted mb-1">Username</label>
+                <div class="input-group shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 rounded-start-3"><i class="bi bi-person-fill text-muted"></i></span>
+                    <input type="text" id="loginUsername" class="form-control border-start-0 ps-0 py-2 rounded-end-3" placeholder="pasien / dokter / admin">
+                </div>
+            </div>
+            <div class="mb-4 text-start">
+                <label class="small fw-bold text-muted mb-1">Password</label>
+                <div class="input-group shadow-sm">
+                    <span class="input-group-text bg-white border-end-0 rounded-start-3"><i class="bi bi-lock-fill text-muted"></i></span>
+                    <input type="password" class="form-control border-start-0 ps-0 py-2 rounded-end-3" placeholder="••••••••">
+                </div>
+            </div>
+            <button onclick="prosesLogin()" class="btn-login">Login Sistem</button>
+            
+            <div class="mt-4 p-3 rounded-4 small text-start" style="background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.2);">
+                <b class="text-primary"><i class="bi bi-info-circle-fill me-1"></i> Akun Demo:</b><br>
+                <span class="text-muted">Ketik <b>pasien</b>, <b>dokter</b>, atau <b>admin</b> untuk melihat dashboard dengan UI/UX yang berbeda.</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="viewPasien" class="view-container d-none">
+        <div class="p-sidebar">
+            <h3 class="mb-5"><i class="bi bi-heart-pulse"></i></h3>
+            <div class="mb-4 fs-4"><i class="bi bi-house-door-fill"></i></div>
+            <div class="mb-4 fs-4 opacity-50"><i class="bi bi-calendar-check"></i></div>
+            <a href="#" onclick="logout()" class="text-white mt-5 d-block fs-4"><i class="bi bi-box-arrow-left"></i></a>
+        </div>
+
+        <div class="p-main">
+            <h2 class="fw-bold mb-1">Halo, <span id="pNameHeader">Ashley</span>!</h2>
+            <p class="text-muted mb-4">Dashboard Pasien & Keluarga</p>
+
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="p-card h-100">
+                        <h3>Cek Kesehatan</h3>
+                        <p class="opacity-75 small mb-4">Pantau jadwal kontrol dan riwayat<br>penyakit keluarga Anda.</p>
+                        <button class="btn btn-light text-info fw-bold rounded-pill px-4" onclick="alert('Membuka form pendaftaran kontrol...')">Buat Jadwal Baru +</button>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="bg-white p-4 rounded-4 shadow-sm h-100 border-start border-info border-5">
+                        <h6 class="fw-bold text-info mb-3"><i class="bi bi-clipboard2-pulse me-2"></i>Riwayat Penyakit</h6>
+                        <div id="pRiwayat" class="small text-muted">
+                            - Tidak ada riwayat penyakit berat.<br>- Jadwal Kontrol Gigi (Rutin)
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="bg-white p-4 rounded-4 shadow-sm">
+                        <h6 class="fw-bold mb-3">Jadwal Kontrol Berikutnya</h6>
+                        <div class="d-flex justify-content-between text-center small px-3">
+                            <span class="text-muted">Sen</span><span class="text-muted">Sel</span><span class="text-muted">Rab</span><span class="text-muted">Kam</span>
+                            <span class="text-white bg-info rounded px-3 py-1 fw-bold shadow-sm" id="pJadwal">Jum (Poli Gigi)</span>
+                            <span class="text-muted">Sab</span><span class="text-muted">Min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-right">
+            <div class="text-center mb-4">
+                <img src="https://ui-avatars.com/api/?name=Ashley&background=88d1d1&color=fff" class="rounded-circle mb-2" width="90" id="pFoto">
+                <h5 class="fw-bold mb-0" id="pNameCard">Ashley Black</h5>
+                <p class="small text-muted" id="pRoleCard">Anak - Pasien Aktif</p>
+                
+                <div class="d-flex justify-content-between bg-light p-3 rounded-4 mt-3 small">
+                    <div>Blood<br><b class="text-dark fs-5" id="pBlood">A+</b></div>
+                    <div>Height<br><b class="text-dark fs-5" id="pHeight">164cm</b></div>
+                    <div>Weight<br><b class="text-dark fs-5" id="pWeight">57kg</b></div>
+                </div>
+            </div>
+
+            <h6 class="fw-bold mb-3"><i class="bi bi-people-fill me-2 text-info"></i>Kartu Keluarga (KK)</h6>
+            <div class="kk-card active" onclick="ubahKeluarga('Ashley', 'Anak', 'A+', '164cm', '57kg', '- Tidak ada riwayat penyakit berat.<br>- Jadwal Kontrol Gigi (Rutin)', 'Jum (Poli Gigi)', this)">
+                <h6 class="mb-0 fw-bold">Ashley Black</h6><small class="text-muted">Anak</small>
+            </div>
+            <div class="kk-card" onclick="ubahKeluarga('John', 'Ayah', 'O', '175cm', '78kg', '- Hipertensi (Darah Tinggi)<br>- Kolesterol Tinggi', 'Sen (Poli Jantung)', this)">
+                <h6 class="mb-0 fw-bold">John Black</h6><small class="text-muted">Ayah</small>
+            </div>
+            <div class="kk-card" onclick="ubahKeluarga('Jane', 'Ibu', 'B', '160cm', '62kg', '- Asam Lambung (Maag Akut)<br>- Vertigo Ringan', 'Rab (Poli Umum)', this)">
+                <h6 class="mb-0 fw-bold">Jane Black</h6><small class="text-muted">Ibu</small>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="viewDokter" class="view-container d-none">
+        <div class="d-sidebar">
+            <div class="fs-4 mb-5"><i class="bi bi-capsule"></i></div>
+            <div class="fs-4 mb-4"><i class="bi bi-calendar-week"></i></div>
+            <a href="#" onclick="logout()" class="text-white mt-auto d-block fs-4"><i class="bi bi-box-arrow-left"></i></a>
+        </div>
+
+        <div class="d-main">
+            <div class="d-banner mb-4 shadow-sm">
+                <h2 class="fw-bold">Good Day, Dr. Nicholls!</h2>
+                <p class="mb-0 opacity-75">Overview jadwal pasien Anda hari ini.</p>
+            </div>
+
+            <div class="d-card">
+                <h5 class="fw-bold mb-4">Jadwal Pasien Hari Ini</h5>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead class="text-muted small"><tr><th>WAKTU</th><th>NAMA PASIEN</th><th>KELUHAN</th><th>AKSI</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td><b class="text-dark">09:00 AM</b></td>
+                                <td><b class="text-primary">John Black</b></td>
+                                <td>Kontrol Hipertensi</td>
+                                <td><button class="btn btn-sm btn-primary rounded-pill px-4">Panggil</button></td>
+                            </tr>
+                            <tr>
+                                <td><b class="text-dark">10:30 AM</b></td>
+                                <td><b class="text-primary">Jane Black</b></td>
+                                <td>Asam Lambung Akut</td>
+                                <td><button class="btn btn-sm btn-outline-danger rounded-pill px-4" onclick="alert('Reschedule jadwal pasien ini?')">Reschedule</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-right">
+            <div class="d-card text-center mb-4">
+                <img src="https://ui-avatars.com/api/?name=Alisha&background=2c5af3&color=fff" class="rounded-circle mb-3 border border-3 border-primary" width="100">
+                <h5 class="fw-bold mb-0">Dr. Alisha Nicholls</h5>
+                <p class="small text-muted mb-3">Dokter Spesialis Penyakit Dalam</p>
+                <div class="bg-light p-3 rounded-4 small text-muted text-start">
+                    <div class="mb-2"><i class="bi bi-droplet-fill text-danger me-2"></i>Blood: <b>A(II) Rh+</b></div>
+                    <div><i class="bi bi-clock-fill text-primary me-2"></i>Hours: <b>9am - 5pm</b></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="viewAdmin" class="view-container d-none">
+        <div class="a-container">
+            <div class="a-topnav">
+                <h4 class="fw-bold text-primary mb-0"><i class="bi bi-shield-check me-2"></i>Panel Administrasi</h4>
+                <button onclick="logout()" class="btn btn-danger rounded-pill px-4">Logout</button>
+            </div>
+
+            <h2 class="fw-bold mb-4">Welcome, Admin Registrasi</h2>
+
+            <div class="row g-4">
+                <div class="col-md-5">
+                    <div class="a-card bg-primary text-white text-center">
+                        <i class="bi bi-people-fill display-1 opacity-50 mb-3 d-block"></i>
+                        <h4 class="fw-bold">Tugas Utama Admin</h4>
+                        <p class="small opacity-75">Cek data pasien saat registrasi.<br>Pastikan status BPJS aktif sebelum dicetak.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-7">
+                    <div class="a-card">
+                        <h5 class="fw-bold mb-4"><i class="bi bi-search me-2 text-primary"></i>Pengecekan Data & BPJS</h5>
+                        <div class="bpjs-box">
+                            <label class="small fw-bold mb-2">Masukkan Nama Pasien (Contoh: John / Jane):</label>
+                            <div class="input-group mb-3 shadow-sm">
+                                <input type="text" id="adminInput" class="form-control bg-white" placeholder="Ketik nama pasien...">
+                                <button onclick="cekDataAdmin()" class="btn btn-primary px-4 fw-bold">Cek Status</button>
+                            </div>
+                            
+                            <div id="hasilAdmin" class="d-none mt-4 p-4 bg-white rounded-4 shadow-sm border border-2">
+                                <h5 class="fw-bold mb-1" id="resNama">Nama Pasien</h5>
+                                <div class="mb-3" id="resStatus">Status BPJS</div>
+                                <div id="btnAksiAdmin"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // 1. Fungsi Login & Animasi
+        function prosesLogin() {
+            const user = document.getElementById('loginUsername').value.toLowerCase().trim();
+            const views = document.querySelectorAll('.view-container');
+            
+            // Validasi Input
+            if(user !== 'pasien' && user !== 'dokter' && user !== 'admin') {
+                alert('Username salah! Harap ketik: pasien, dokter, atau admin');
+                return;
+            }
+
+            // Sembunyikan semua view dan hilangkan class overflow pada body
+            views.forEach(el => el.classList.add('d-none'));
+            document.body.classList.remove('login-mode');
+
+            // Tampilkan View & Ganti Warna Background Sesuai Role
+            if(user === 'pasien') {
+                document.getElementById('viewPasien').classList.remove('d-none');
+                document.body.className = 'bg-teal';
+            } else if(user === 'dokter') {
+                document.getElementById('viewDokter').classList.remove('d-none');
+                document.body.className = 'bg-doc';
+            } else if(user === 'admin') {
+                document.getElementById('viewAdmin').classList.remove('d-none');
+                document.body.className = 'bg-admin';
+            }
+        }
+
+        // 2. Fungsi Logout
+        function logout() {
+            document.querySelectorAll('.view-container').forEach(el => el.classList.add('d-none'));
+            document.getElementById('viewLogin').classList.remove('d-none');
+            document.getElementById('loginUsername').value = '';
+            document.body.className = 'login-mode'; 
+        }
+
+        // 3. Fungsi Pasien: Interaksi Ganti Data KK
+        function ubahKeluarga(nama, role, blood, height, weight, history, jadwal, element) {
+            document.getElementById('pNameHeader').innerText = nama;
+            document.getElementById('pNameCard').innerText = nama + " Black";
+            document.getElementById('pRoleCard').innerText = role + " - Pasien Aktif";
+            document.getElementById('pBlood').innerText = blood;
+            document.getElementById('pHeight').innerText = height;
+            document.getElementById('pWeight').innerText = weight;
+            document.getElementById('pRiwayat').innerHTML = history;
+            document.getElementById('pJadwal').innerText = jadwal;
+            document.getElementById('pFoto').src = `https://ui-avatars.com/api/?name=${nama}&background=88d1d1&color=fff`;
+
+            document.querySelectorAll('.kk-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // 4. Fungsi Admin: Logika Pengecekan BPJS & Opsi Pasien Umum
+        function cekDataAdmin() {
+            const input = document.getElementById('adminInput').value.toLowerCase().trim();
+            const hasilBox = document.getElementById('hasilAdmin');
+            const resNama = document.getElementById('resNama');
+            const resStatus = document.getElementById('resStatus');
+            const btnAksi = document.getElementById('btnAksiAdmin');
+
+            if(input === '') { alert('Nama tidak boleh kosong!'); return; }
+
+            hasilBox.classList.remove('d-none');
+
+            // Skenario Logika 
+            if(input.includes('john')) {
+                hasilBox.className = "mt-4 p-4 bg-white rounded-4 shadow-sm border border-2 border-danger";
+                resNama.innerText = "John Black (Ayah)";
+                resStatus.innerHTML = "<span class='badge bg-danger fs-6'><i class='bi bi-x-circle me-1'></i> BPJS Tidak Aktif (Menunggak)</span><p class='small text-muted mt-2'>Pasien belum membayar tagihan BPJS. Tidak bisa menggunakan layanan gratis.</p>";
+                btnAksi.innerHTML = `<button class="btn btn-warning w-100 fw-bold shadow-sm" onclick="alert('Sistem diubah. Pasien sekarang mendaftar sebagai PASIEN UMUM (Berbayar).')">Jadikan Pasien Umum</button>`;
+            
+            } else if (input.includes('jane') || input.includes('ashley')) {
+                hasilBox.className = "mt-4 p-4 bg-white rounded-4 shadow-sm border border-2 border-success";
+                resNama.innerText = input.includes('jane') ? "Jane Black (Ibu)" : "Ashley Black (Anak)";
+                resStatus.innerHTML = "<span class='badge bg-success fs-6'><i class='bi bi-check-circle me-1'></i> BPJS Aktif</span><p class='small text-muted mt-2'>Data valid. Pasien berhak menerima layanan BPJS penuh.</p>";
+                btnAksi.innerHTML = `<button class="btn btn-success w-100 fw-bold shadow-sm" onclick="alert('Antrean BPJS berhasil dicetak!')">Cetak Antrean BPJS</button>`;
+            
+            } else {
+                hasilBox.className = "mt-4 p-4 bg-white rounded-4 shadow-sm border border-2 border-secondary";
+                resNama.innerText = "Data Tidak Ditemukan";
+                resStatus.innerHTML = "<span class='text-muted small'>Pastikan nama diketik dengan benar.</span>";
+                btnAksi.innerHTML = "";
+            }
+        }
+    </script>
+</body>
+</html>
