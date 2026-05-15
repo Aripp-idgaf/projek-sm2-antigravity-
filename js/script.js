@@ -3,11 +3,11 @@ function prosesLogin() {
     const user = document.getElementById('loginUsername').value.toLowerCase().trim();
     
     if(user === 'pasien') {
-        window.location.href = 'pages/pasien.html';
+        window.location.href = 'pages/pasien/pasien.html'; // <-- Diubah
     } else if(user === 'dokter') {
-        window.location.href = 'pages/dokter.html';
+        window.location.href = 'pages/dokter/dokter.html'; // <-- Diubah
     } else if(user === 'admin') {
-        window.location.href = 'pages/admin.html';
+        window.location.href = 'pages/admin/admin.html'; // <-- Diubah
     } else {
         alert('Username salah! Harap ketik: pasien, dokter, atau admin');
     }

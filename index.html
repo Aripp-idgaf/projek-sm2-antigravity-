@@ -42,8 +42,8 @@
 
         .bg-icon {
             position: absolute;
-            color: #38c8e6; /* Warna Senada Tombol Sign In */
-            opacity: 0.18; /* Transparansi halus agar tidak mengganggu mata */
+            color: #38c8e6; 
+            opacity: 0.18; 
             animation: floatAnim 8s ease-in-out infinite;
         }
 
@@ -110,10 +110,12 @@
             color: white; font-weight: 600; font-size: 1.3rem;
             position: relative; z-index: 2;
         }
+        /* Menggunakan icon detak jantung seperti di dashboard */
         .cal-logo i { font-size: 1.8rem; margin-right: 12px; color: #38c8e6; }
 
         /* Ikon Header Form Kanan */
         .form-logo { text-align: center; margin-bottom: 10px; }
+        /* Menggunakan icon detak jantung seperti di dashboard */
         .form-logo i { font-size: 4.5rem; color: #38c8e6; }
 
         /* Input Styling */
@@ -158,10 +160,10 @@
         <div class="login-split">
             
             <div class="log-left">
-                <img id="slider-image" src="images/rs1.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity 0.8s ease-in-out;">
+                <img id="slider-image" src="images/wallpaper/rs1.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity 0.8s ease-in-out;">
                 <div class="slider-overlay"></div>
                 <div class="cal-logo">
-                    <i class="bi bi-hospital"></i> 
+                    <i class="bi bi-heart-pulse"></i>
                     <span>MediFlow</span>
                 </div>
                 <div class="cal-footer">
@@ -172,7 +174,7 @@
             <div class="log-right">
                 <div class="form-center">
                     <div class="form-logo">
-                        <i class="bi bi-hospital"></i> 
+                        <i class="bi bi-heart-pulse"></i>
                     </div>
                     <h3 style="color: #333; text-align: center; margin-bottom: 5px; font-weight: 600;">Sign In</h3>
                     <p style="color: #999; text-align: center; font-size: 0.85rem; margin-bottom: 25px;">Log in to your membership</p>
@@ -206,17 +208,13 @@
         </div>
     </div>
 
-    <script>
-        function prosesLogin() {
-            const user = document.getElementById('loginUsername').value.toLowerCase().trim();
-            if(user === 'pasien') { window.location.href = 'pages/pasien.html'; }
-            else if(user === 'dokter') { window.location.href = 'pages/dokter.html'; }
-            else if(user === 'admin') { window.location.href = 'pages/admin.html'; }
-            else { alert('Username salah! Harap ketik: pasien, dokter, atau admin'); }
-        }
+    <script src="js/script.js"></script>
 
+    <script>
         const sliderImg = document.getElementById('slider-image');
-        const images = ["images/rs1.jpg", "images/rs2.jpg", "images/rs3.jpg"];
+        
+        const images = ["images/wallpaper/rs1.jpg", "images/wallpaper/rs2.jpg", "images/wallpaper/rs3.jpg"];
+        
         images.forEach(src => { let i = new Image(); i.src = src; });
         
         let i = 0;
