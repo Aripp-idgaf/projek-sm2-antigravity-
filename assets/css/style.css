@@ -1,0 +1,75 @@
+/* === GLOBAL SETTINGS === */
+body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =========================================
+   0. LOGIN PAGE (Split Screen Premium)
+========================================= */
+body.login-mode { background-color: #0c1a2c; overflow: hidden; }
+.login-wrapper { height: 100vh; display: flex; justify-content: center; align-items: center; background: #0c1a2c; animation: fadeIn 0.6s ease-out; }
+.login-split { width: 100%; max-width: 1000px; display: flex; background: white; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); overflow: hidden; }
+.log-left { flex: 1.1; padding: 60px; background: white; }
+.log-right { flex: 0.9; background: #e0f2fe; padding: 60px; text-align: center; display: flex; flex-direction: column; justify-content: center; color: #0f3057; }
+.med-input { border: 2px solid #f1f5f9; border-radius: 12px; padding: 14px; width: 100%; margin-bottom: 20px; font-family: 'Poppins', sans-serif; background: #f8fafc; outline: none; transition: 0.3s;}
+.med-input:focus { border-color: #0ea5e9; background: white; }
+.btn-log { background: #0f3057; color: white; border-radius: 12px; padding: 16px; font-weight: 600; width: 100%; border: none; transition: 0.3s; }
+.btn-log:hover { background: #1e40af; }
+
+/* =========================================
+   1. PASIEN (ASHLEY STYLE - TEAL)
+========================================= */
+.bg-pasien { background-color: #eef5f5; font-family: 'Quicksand', sans-serif; animation: fadeIn 0.5s ease-out;}
+.ashley-container { display: flex; padding: 20px; gap: 20px; height: 100vh; box-sizing: border-box; }
+.ash-sidebar { width: 100px; background: #6cb7b7; border-radius: 35px; display: flex; flex-direction: column; align-items: center; padding: 30px 0; color: white; }
+.ash-sidebar .nav-icon { width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; border-radius: 15px; font-size: 1.4rem; margin-bottom: 15px; cursor: pointer; color: rgba(255,255,255,0.7); transition: 0.3s;}
+.ash-sidebar .nav-icon.active { background: rgba(255,255,255,0.2); color: white; }
+.ash-main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 10px 20px; }
+.ash-card-wel { background: linear-gradient(135deg, #57b7b7, #74c6c6); border-radius: 30px; padding: 30px; color: white; height: 100%; position: relative; overflow: hidden;}
+.ash-card-res { background: linear-gradient(135deg, #7b9df2, #9bbaff); border-radius: 30px; padding: 30px; color: white; height: 100%; }
+.ash-mini-card { background: white; border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); height: 100%;}
+.ash-calendar { background: white; border-radius: 30px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); margin-top: 15px;}
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 10px 0; margin-top: 15px;}
+.cal-day { font-weight: 600; color: #555; width: 40px; height: 40px; margin: 0 auto; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer;}
+.cal-day.active { background: #6cb7b7; color: white; box-shadow: 0 5px 15px rgba(108, 183, 183, 0.4);}
+.cal-day.text-muted { color: #ccc; font-weight: 400;}
+.ash-right { width: 340px; background: white; border-radius: 35px; padding: 30px; box-shadow: -5px 0 20px rgba(0,0,0,0.02); overflow-y: auto; }
+.kk-tab { background: #f0f5f5; border-radius: 12px; padding: 10px; text-align: center; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: #777; flex: 1; transition: 0.3s;}
+.kk-tab.active { background: white; color: #6cb7b7; box-shadow: 0 2px 10px rgba(0,0,0,0.05);}
+
+/* =========================================
+   2. DOKTER (ISTIAK AHMED STYLE - SOLID BLUE)
+========================================= */
+.bg-dokter { background-color: #f0f5fa; animation: fadeIn 0.5s ease-out;}
+.ist-container { display: flex; padding: 20px; gap: 20px; height: 100vh; box-sizing: border-box; }
+.ist-sidebar { width: 260px; background: #0d6efd; border-radius: 30px; color: white; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+.ist-profile { text-align: center; margin-bottom: 40px; }
+.ist-profile img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.3); margin-bottom: 15px; }
+.ist-nav { width: 100%; border-radius: 15px; padding: 15px 20px; color: rgba(255,255,255,0.7); margin-bottom: 10px; cursor: pointer; transition: 0.3s; font-weight: 500; display: flex; align-items: center;}
+.ist-nav.active { background: rgba(255,255,255,0.15); color: white; font-weight: 600;}
+.ist-main { flex: 1; overflow-y: auto; padding: 10px; }
+.ist-stat-card { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); height: 100%; display: flex; flex-direction: column; justify-content: center;}
+.patient-card { background: white; border-radius: 25px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+.pc-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+.pc-header img { width: 50px; height: 50px; border-radius: 50%; }
+.pc-table { width: 100%; font-size: 0.85rem; }
+.pc-table td { padding: 8px 0; border-bottom: 1px solid #f1f5f9; }
+.pc-table tr:last-child td { border-bottom: none; }
+.status-badge { padding: 5px 12px; border-radius: 20px; font-weight: 600; font-size: 0.75rem; }
+
+/* =========================================
+   3. ADMIN (CREXTIO STYLE - LIGHT BLUE)
+========================================= */
+.bg-admin { background-color: #eaf1f8; animation: fadeIn 0.5s ease-out;}
+.crex-container { padding: 40px; max-width: 1400px; margin: 0 auto; min-height: 100vh;}
+.crex-topnav { display: flex; justify-content: center; margin-bottom: 40px; }
+.crex-pill { background: white; border-radius: 50px; padding: 10px 15px; display: inline-flex; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+.crex-item { padding: 8px 20px; border-radius: 30px; font-weight: 600; font-size: 0.9rem; color: #64748b; cursor: pointer;}
+.crex-item.active { background: #0f3057; color: white; }
+.crex-profile-card { background: linear-gradient(to bottom, #dbeafe, #bae6fd); border-radius: 30px; padding: 30px; text-align: center; height: 100%; position: relative; overflow: hidden;}
+.crex-profile-card img { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 20px; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);}
+.crex-stat-box { background: white; border-radius: 30px; padding: 30px; height: 100%; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+.crex-dark-card { background: #0f3057; border-radius: 30px; padding: 30px; color: white; height: 100%; box-shadow: 0 10px 30px rgba(15, 48, 87, 0.3);}
+.bpjs-input-group { background: rgba(255,255,255,0.1); border-radius: 15px; padding: 5px; display: flex; margin-bottom: 20px;}
+.bpjs-input-group input { background: transparent; border: none; color: white; padding: 10px 15px; flex: 1; outline: none;}
+.bpjs-input-group input::placeholder { color: rgba(255,255,255,0.5); }
+.bpjs-input-group button { background: #0ea5e9; border: none; border-radius: 12px; color: white; padding: 0 20px; font-weight: 600;}
