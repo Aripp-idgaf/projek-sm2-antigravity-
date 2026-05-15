@@ -8,17 +8,161 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* RESET DASAR */
+        * { box-sizing: border-box; }
+
+        /* --- 1. ANIMASI MELAYANG HALUS --- */
+        @keyframes floatAnim {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(8deg); }
+        }
+
+        /* --- 2. LATAR BELAKANG BIRU MUDA BERSIH --- */
+        body.login-mode {
+            background-color: #e0f7fa; 
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- 3. SISTEM IKON BACKGROUND ALAT MEDIS (RAMAI) --- */
+        .bg-icon-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-icon {
+            position: absolute;
+            color: #38c8e6; /* Warna Senada Tombol Sign In */
+            opacity: 0.18; /* Transparansi halus agar tidak mengganggu mata */
+            animation: floatAnim 8s ease-in-out infinite;
+        }
+
+        /* Sebaran Ikon Alat Medis di Seluruh Layar */
+        .i1 { top: 5%; left: 5%; font-size: 7rem; }
+        .i2 { top: 12%; left: 22%; font-size: 4rem; animation-delay: 1s; }
+        .i3 { top: 5%; right: 8%; font-size: 8rem; animation-delay: 2s; }
+        .i4 { top: 25%; right: 20%; font-size: 5rem; animation-delay: 0.5s; }
+        .i5 { bottom: 8%; left: 6%; font-size: 9rem; animation-delay: 3s; }
+        .i6 { bottom: 25%; left: 25%; font-size: 4rem; animation-delay: 1.5s; }
+        .i7 { bottom: 10%; right: 10%; font-size: 7rem; animation-delay: 4s; }
+        .i8 { bottom: 35%; right: 28%; font-size: 5rem; animation-delay: 2.5s; }
+        .i9 { top: 45%; left: 8%; font-size: 5rem; animation-delay: 1.2s; }
+        .i10 { top: 40%; right: 5%; font-size: 6rem; animation-delay: 0.8s; }
+        .i11 { top: 20%; left: 40%; font-size: 3.5rem; animation-delay: 4.5s; }
+        .i12 { bottom: 20%; right: 45%; font-size: 4.5rem; animation-delay: 3.2s; }
+
+        /* --- 4. LAYOUT LOGIN UTAMA (LEBAR & LEGA) --- */
+        .login-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        .login-split {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            width: 1050px; 
+            max-width: 100%;
+            min-height: 580px; 
+        }
+
+        .log-left {
+            flex: 1; 
+            position: relative; 
+            overflow: hidden; 
+            padding: 40px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between;
+        }
+
+        .log-right {
+            flex: 1.1; 
+            padding: 50px 70px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch; 
+        }
+
+        .slider-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(52, 73, 94, 0.6); 
+            z-index: 1;
+        }
+
+        /* Branding Panel Kiri */
+        .cal-logo {
+            display: flex; align-items: center; 
+            color: white; font-weight: 600; font-size: 1.3rem;
+            position: relative; z-index: 2;
+        }
+        .cal-logo i { font-size: 1.8rem; margin-right: 12px; color: #38c8e6; }
+
+        /* Ikon Header Form Kanan */
+        .form-logo { text-align: center; margin-bottom: 10px; }
+        .form-logo i { font-size: 4.5rem; color: #38c8e6; }
+
+        /* Input Styling */
+        .input-icon { position: relative; margin-bottom: 18px; width: 100%; }
+        .input-icon i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #999; z-index: 5;}
+        
+        .cal-input {
+            width: 100%; border-radius: 50px !important;
+            padding: 12px 15px 12px 45px !important; 
+            border: 1px solid #eaeaea !important;
+            font-size: 0.85rem; color: #555;
+        }
+        .cal-input:focus { border-color: #38c8e6 !important; box-shadow: 0 0 0 3px rgba(56, 200, 230, 0.1) !important; outline: none;}
+
+        .btn-cal {
+            background-color: #38c8e6; color: white; border: none; width: 100%; padding: 14px;
+            border-radius: 50px; font-weight: 600; transition: 0.3s; margin-top: 5px;
+        }
+        .btn-cal:hover { background-color: #2ab5d3; transform: translateY(-2px); }
+
+        .cal-footer { position: relative; z-index: 2; color: rgba(255,255,255,0.8); font-size: 0.8rem; }
+    </style>
 </head>
 <body class="login-mode">
+
+    <div class="bg-icon-container">
+        <i class="bi bi-stethoscope bg-icon i1"></i>
+        <i class="bi bi-capsule bg-icon i2"></i>
+        <i class="bi bi-heart-pulse bg-icon i3"></i>
+        <i class="bi bi-syringe bg-icon i4"></i>
+        <i class="bi bi-bandaid bg-icon i5"></i>
+        <i class="bi bi-thermometer-half bg-icon i6"></i>
+        <i class="bi bi-droplet-fill bg-icon i7"></i>
+        <i class="bi bi-clipboard2-pulse bg-icon i8"></i>
+        <i class="bi bi-capsule-pill bg-icon i9"></i>
+        <i class="bi bi-virus bg-icon i10"></i>
+        <i class="bi bi-medicine-bottle bg-icon i11"></i>
+        <i class="bi bi-lungs bg-icon i12"></i>
+    </div>
 
     <div class="login-wrapper">
         <div class="login-split">
             
-            <div class="log-left" id="bg-slider">
+            <div class="log-left">
+                <img id="slider-image" src="images/rs1.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: opacity 0.8s ease-in-out;">
                 <div class="slider-overlay"></div>
                 <div class="cal-logo">
-                    <i class="bi bi-c-circle-fill"></i> MediFlow
+                    <i class="bi bi-hospital"></i> 
+                    <span>MediFlow</span>
                 </div>
                 <div class="cal-footer">
                     All Right Reserved. 2026
@@ -26,44 +170,36 @@
             </div>
 
             <div class="log-right">
-                <button class="top-btn" onclick="alert('Versi demo, gunakan tombol Sign In di bawah.')">Log In</button>
-                
                 <div class="form-center">
                     <div class="form-logo">
-                        <i class="bi bi-c-circle-fill"></i>
+                        <i class="bi bi-hospital"></i> 
                     </div>
-                    <h3>Sign In</h3>
-                    <p>Log in to your membership</p>
+                    <h3 style="color: #333; text-align: center; margin-bottom: 5px; font-weight: 600;">Sign In</h3>
+                    <p style="color: #999; text-align: center; font-size: 0.85rem; margin-bottom: 25px;">Log in to your membership</p>
 
                     <div class="input-icon">
                         <i class="bi bi-person"></i>
                         <input type="text" id="loginUsername" class="cal-input" placeholder="Enter User Name (pasien/dokter/admin)">
                     </div>
-                    
                     <div class="input-icon">
                         <i class="bi bi-envelope"></i>
                         <input type="email" class="cal-input" placeholder="Enter Email (Optional)">
                     </div>
-
                     <div class="input-icon">
                         <i class="bi bi-lock"></i>
                         <input type="password" class="cal-input" placeholder="Password">
                     </div>
 
-                    <div class="check-container">
+                    <div class="text-center mb-3" style="font-size: 0.8rem;">
                         <input type="checkbox" id="terms">
-                        <label for="terms">I read and agree to the <a href="#">Terms of use</a></label>
+                        <label for="terms" style="color: #777;"> I read and agree to the <a href="#" style="color: #38c8e6; text-decoration: none;">Terms of use</a></label>
                     </div>
 
                     <button class="btn-cal" onclick="prosesLogin()">Sign In</button>
 
-                    <div class="bottom-link">
-                        Need an account? <a href="#">Sign Up</a>
+                    <div class="text-center mt-3" style="font-size: 0.85rem; color: #999;">
+                        Need an account? <a href="#" style="color: #38c8e6; text-decoration: none; font-weight: 600;">Sign Up</a>
                     </div>
-                </div>
-
-                <div class="right-footer">
-                    <a href="#">Contact Us</a> | <a href="#">About Us</a> | <a href="#">FAQ</a>
                 </div>
             </div>
 
@@ -71,42 +207,28 @@
     </div>
 
     <script>
-        // 1. Fungsi Routing Login
         function prosesLogin() {
             const user = document.getElementById('loginUsername').value.toLowerCase().trim();
-            
-            if(user === 'pasien') {
-                window.location.href = 'pages/pasien.html';
-            } else if(user === 'dokter') {
-                window.location.href = 'pages/dokter.html';
-            } else if(user === 'admin') {
-                window.location.href = 'pages/admin.html';
-            } else {
-                alert('Username salah! Harap ketik: pasien, dokter, atau admin');
-            }
+            if(user === 'pasien') { window.location.href = 'pages/pasien.html'; }
+            else if(user === 'dokter') { window.location.href = 'pages/dokter.html'; }
+            else if(user === 'admin') { window.location.href = 'pages/admin.html'; }
+            else { alert('Username salah! Harap ketik: pasien, dokter, atau admin'); }
         }
 
-        // 2. Fungsi Slider Gambar (Tema Kesehatan Tanpa Biru Tua)
-        const sliderDiv = document.getElementById('bg-slider');
-        
-        // Kumpulan gambar medis cerah (Stetoskop, Dokter, Lab)
-        const images = [
-            "url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?q=80&w=1000&auto=format&fit=crop')", // Stetoskop Cerah
-            "url('https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1000&auto=format&fit=crop')", // Laboratorium
-            "url('https://images.unsplash.com/photo-1551076805-e18690c5e561?q=80&w=1000&auto=format&fit=crop')"  // Rumah Sakit / Lorong Terang
-        ];
+        const sliderImg = document.getElementById('slider-image');
+        const images = ["images/rs1.jpg", "images/rs2.jpg", "images/rs3.jpg"];
+        images.forEach(src => { let i = new Image(); i.src = src; });
         
         let i = 0;
         function gantiGambar() {
-            sliderDiv.style.backgroundImage = images[i];
-            i = (i + 1) % images.length; // Loop kembali ke 0 jika sudah gambar terakhir
+            i = (i + 1) % images.length; 
+            sliderImg.style.opacity = 0; 
+            setTimeout(() => {
+                sliderImg.src = images[i];
+                sliderImg.style.opacity = 1; 
+            }, 800); 
         }
-
-        // Jalankan gantiGambar setiap 4 detik (4000ms)
-        setInterval(gantiGambar, 4000);
-        
-        // Panggil 1x saat pertama kali web dibuka
-        gantiGambar();
+        setInterval(gantiGambar, 4500);
     </script>
 </body>
 </html>

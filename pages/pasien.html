@@ -14,15 +14,54 @@
     <div class="ashley-container">
         
         <div class="ash-sidebar">
-            <div class="fw-bold fs-5 mb-5 text-center lh-1"><i class="bi bi-plus-lg fs-3 d-block mb-1"></i>Med<br>Board</div>
-            <div class="nav-icon active" onclick="alert('Anda sedang di halaman Home!')"><i class="bi bi-house-door"></i></div>
-            <div class="nav-icon" onclick="alert('Menu Hati / Favorit diklik!')"><i class="bi bi-heart"></i></div>
-            <div class="nav-icon" onclick="alert('Menu Kalender diklik!')"><i class="bi bi-calendar4"></i></div>
-            <div class="nav-icon mt-auto" onclick="logout()"><i class="bi bi-box-arrow-right"></i></div>
+            <div class="fw-bold fs-6 mb-4 text-center lh-1">
+                <i class="bi bi-plus-lg fs-4 d-block mb-1"></i>Med<br>Board
+            </div>
+            
+            <div class="nav-wrapper active">
+                <div class="nav-icon"><i class="bi bi-house-door"></i></div>
+                <span class="nav-label">Home</span>
+            </div>
+
+            <div class="nav-wrapper">
+                <div class="nav-icon"><i class="bi bi-chat-dots"></i></div>
+                <span class="nav-label">Pesan</span>
+            </div>
+
+            <div class="nav-wrapper">
+                <div class="nav-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+                <span class="nav-label">Riwayat</span>
+            </div>
+
+            <div class="nav-wrapper">
+                <div class="nav-icon"><i class="bi bi-heart"></i></div>
+                <span class="nav-label">Favorit</span>
+            </div>
+
+            <div class="nav-wrapper">
+                <div class="nav-icon"><i class="bi bi-calendar4"></i></div>
+                <span class="nav-label">Jadwal</span>
+            </div>
+
+            <div class="nav-wrapper">
+                <div class="nav-icon"><i class="bi bi-bell"></i></div>
+                <span class="nav-label">Notif</span>
+            </div>
+            
+            <div class="mt-auto w-100 d-flex flex-column align-items-center">
+                <div class="nav-wrapper mb-2" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <div class="nav-icon"><i class="bi bi-gear"></i></div>
+                    <span class="nav-label">Setting</span>
+                </div>
+                <div class="nav-wrapper text-danger" onclick="logout()">
+                    <div class="nav-icon"><i class="bi bi-box-arrow-right"></i></div>
+                    <span class="nav-label">Keluar</span>
+                </div>
+            </div>
         </div>
 
         <div class="ash-main">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center mt-3 mb-4">
                 <div>
                     <h2 class="fw-bold mb-0" style="color: #2c3e50;">Hello, <span id="ashNameTitle">Ashley!</span></h2>
                     <p class="text-muted small mb-0">12 April 2026, Monday</p>
@@ -54,28 +93,28 @@
             <div class="row g-3 mb-3">
                 <div class="col-md-4">
                     <div class="ash-mini-card">
-                        <div style="background: #eef7f7; color: #57b7b7; width: 50px; height: 50px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem;"><i class="bi bi-clipboard2-check"></i></div>
+                        <div class="mini-icon teal"><i class="bi bi-clipboard2-check"></i></div>
                         <div>
                             <h6 class="fw-bold mb-0 text-dark">Diagnosis</h6>
-                            <span class="small text-muted" id="ashDiag" style="font-size: 0.75rem;">Lists of diseases</span>
+                            <span class="small text-muted" id="ashDiag">Lists of diseases</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="ash-mini-card">
-                        <div style="background: #f0f4ff; color: #7b9df2; width: 50px; height: 50px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem;"><i class="bi bi-droplet-half"></i></div>
+                        <div class="mini-icon blue"><i class="bi bi-droplet-half"></i></div>
                         <div>
                             <h6 class="fw-bold mb-0 text-dark">Tests</h6>
-                            <span class="small text-muted" style="font-size: 0.75rem;">Archive of tests</span>
+                            <span class="small text-muted">Archive of tests</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="ash-mini-card">
-                        <div style="background: #fff9e6; color: #f2c94c; width: 50px; height: 50px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem;"><i class="bi bi-capsule"></i></div>
+                        <div class="mini-icon yellow"><i class="bi bi-capsule"></i></div>
                         <div>
                             <h6 class="fw-bold mb-0 text-dark">Drugs</h6>
-                            <span class="small text-muted" id="ashDrugs" style="font-size: 0.75rem;">Prescribed med</span>
+                            <span class="small text-muted" id="ashDrugs">Prescribed med</span>
                         </div>
                     </div>
                 </div>
@@ -86,14 +125,15 @@
                 <div class="cal-grid small text-muted mb-2">
                     <span>mo</span><span>tu</span><span>we</span><span>th</span><span>fr</span><span>sa</span><span>su</span>
                 </div>
-                <div class="cal-grid">
+                <div class="cal-grid" id="calendarGrid">
                     <div class="cal-day text-muted">28</div><div class="cal-day text-muted">29</div><div class="cal-day text-muted">30</div><div class="cal-day text-muted">31</div>
                     <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div>
                     <div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
                     <div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div>
                     <div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div>
                     <div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div>
-                    <div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day active" id="ashAppt">21</div>
+                    <div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div>
+                    <div class="cal-day active" id="ashAppt">21</div>
                     <div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div>
                 </div>
             </div>
@@ -118,21 +158,87 @@
                 <div><span class="small text-muted d-block">Weight</span><h6 class="fw-bold mb-0 text-dark" id="ashWeight">57kg</h6></div>
             </div>
 
-            <div class="mb-4">
+            <div class="card border-0 rounded-4 p-3 mb-4 shadow-sm" style="background: #f8f9fa;">
                 <h6 class="fw-bold small mb-2 text-dark">17/04/2026</h6>
                 <h6 class="fw-bold mb-2 text-dark" style="font-size: 0.9rem;">Recent Results</h6>
-                <p class="text-muted" style="font-size: 0.75rem;">Your heart rate is considered normal, most healthy relaxed adults have a resting heart...</p>
+                <p class="text-muted mb-0" style="font-size: 0.75rem;">Your heart rate is considered normal, most healthy relaxed adults have a resting heart...</p>
+            </div>
+            
+            <div class="card border-0 rounded-4 p-3 bg-pasien shadow-sm">
+                <h6 class="fw-bold small mb-2 text-dark"><i class="bi bi-shield-check me-2"></i>BPJS Status</h6>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="small text-muted">Aktif - Faskes I</span>
+                    <span class="badge bg-success rounded-pill">Active</span>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0" style="border-radius: 30px; overflow: hidden;">
+                <div class="modal-body p-0">
+                    <div class="d-flex" style="min-height: 500px;">
+                        <div class="p-4" style="width: 220px; background: #f8fafb;">
+                            <h5 class="fw-bold mb-4 text-dark">Settings</h5>
+                            <div class="nav flex-column nav-pills" id="settings-tabs">
+                                <button class="nav-link active small text-start" data-bs-toggle="pill" data-bs-target="#pills-profile">Profil</button>
+                                <button class="nav-link small text-start" data-bs-toggle="pill" data-bs-target="#pills-kk">Data Keluarga</button>
+                                <button class="nav-link small text-start" data-bs-toggle="pill" data-bs-target="#pills-bpjs">BPJS</button>
+                                <button class="nav-link small text-start" data-bs-toggle="pill" data-bs-target="#pills-pay">Pembayaran</button>
+                            </div>
+                        </div>
+                        <div class="p-5 flex-grow-1 bg-white">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="pills-profile">
+                                    <h6 class="fw-bold mb-4">Edit Profil</h6>
+                                    <div class="mb-3">
+                                        <label class="small text-muted mb-1">Nama Lengkap</label>
+                                        <input type="text" class="form-control rounded-3" value="Ashley Black">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="small text-muted mb-1">Email</label>
+                                        <input type="email" class="form-control rounded-3" value="ashley.black@gmail.com">
+                                    </div>
+                                    <button class="btn btn-teal w-100 mt-3 shadow-sm">Simpan Perubahan</button>
+                                </div>
+                                <div class="tab-pane fade" id="pills-kk">
+                                    <h6 class="fw-bold mb-3">Kartu Keluarga Digital</h6>
+                                    <div class="p-3 border rounded-4 mb-2 d-flex justify-content-between align-items-center">
+                                        <div><h6 class="mb-0 small fw-bold">John Black</h6><span class="small text-muted">Ayah</span></div>
+                                        <i class="bi bi-pencil small"></i>
+                                    </div>
+                                    <div class="p-3 border rounded-4 mb-2 d-flex justify-content-between align-items-center">
+                                        <div><h6 class="mb-0 small fw-bold">Jane Black</h6><span class="small text-muted">Ibu</span></div>
+                                        <i class="bi bi-pencil small"></i>
+                                    </div>
+                                    <button class="btn btn-outline-info w-100 rounded-pill mt-3 small">+ Tambah Anggota</button>
+                                </div>
+                                <div class="tab-pane fade" id="pills-bpjs">
+                                    <h6 class="fw-bold mb-4">Jaminan Kesehatan</h6>
+                                    <div class="bg-light p-3 rounded-4 mb-3">
+                                        <p class="small text-muted mb-1">Nomor Peserta BPJS</p>
+                                        <h6 class="fw-bold">000123456789</h6>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="small text-muted mb-1">Faskes Tingkat I</label>
+                                        <input type="text" class="form-control rounded-3" value="Puskesmas Semarang Tengah">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // 1. Fungsi Logout (Kembali ke index)
-        function logout() {
+        function logout() { 
             window.location.href = '../index.html'; 
         }
 
-        // 2. Ashley Pasien: Ganti KK
         function gantiAshley(nama, role, blood, height, weight, diag, drugs, dateActive, element) {
             document.getElementById('ashNameTitle').innerText = nama + "!";
             document.getElementById('ashNameProfile').innerText = nama + " Black";
