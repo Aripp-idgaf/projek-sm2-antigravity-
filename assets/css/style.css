@@ -6,7 +6,6 @@ body {
     overflow-x: hidden; 
 }
 
-/* PERBAIKAN: Animasi dipindah dari sini... */
 body.bg-pasien { 
     background-color: #f4f8f8;
     font-family: 'Quicksand', sans-serif; 
@@ -17,7 +16,6 @@ body.bg-pasien {
     to { opacity: 1; transform: translateY(0); } 
 }
 
-/* ...Animasi dipindah ke sini agar Modal tidak nyangkut */
 .ashley-container { 
     display: flex; 
     padding: 15px; 
@@ -27,7 +25,7 @@ body.bg-pasien {
     animation: fadeIn 0.5s ease-out;
 }
 
-/* === 8. EMERGENCY BUTTON === */
+/* === EMERGENCY BUTTON === */
 .btn-emergency {
     position: fixed;
     bottom: 30px;
@@ -47,9 +45,7 @@ body.bg-pasien {
     animation: pulse 2s infinite;
 }
 
-.btn-emergency:hover {
-    transform: scale(1.1);
-}
+.btn-emergency:hover { transform: scale(1.1); }
 
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7); }
@@ -102,18 +98,10 @@ body.bg-pasien {
     text-transform: uppercase;
 }
 
-.nav-wrapper:hover .nav-icon, 
-.nav-wrapper.active .nav-icon { 
-    color: white; 
-    background: #6cb7b7; 
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(108, 183, 183, 0.4);
+.nav-wrapper:hover .nav-icon, .nav-wrapper.active .nav-icon { 
+    color: white; background: #6cb7b7; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(108, 183, 183, 0.4);
 }
-
-.nav-wrapper:hover .nav-label, 
-.nav-wrapper.active .nav-label { 
-    color: #6cb7b7; 
-}
+.nav-wrapper:hover .nav-label, .nav-wrapper.active .nav-label { color: #6cb7b7; }
 
 /* === MAIN CONTENT STYLE === */
 .ash-main { 
@@ -145,158 +133,67 @@ body.bg-pasien {
 }
 
 .ash-card-queue .glow-bg {
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
+    position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
     background: radial-gradient(circle, rgba(13, 202, 240, 0.1) 0%, rgba(255,255,255,0) 70%);
-    animation: rotateGlow 10s linear infinite;
-    z-index: 0;
+    animation: rotateGlow 10s linear infinite; z-index: 0;
 }
 
-@keyframes rotateGlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+@keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-.ash-calendar { 
-    background: white; 
-    border-radius: 30px; 
-    padding: 30px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
-}
+.ash-calendar { background: white; border-radius: 30px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
 
-.cal-grid { 
-    display: grid; 
-    grid-template-columns: repeat(7, 1fr); 
-    text-align: center; 
-    gap: 8px 0; 
-}
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 8px 0; }
 
 .cal-day { 
-    font-weight: 600; 
-    color: #555; 
-    width: 32px; 
-    height: 32px; 
-    margin: 0 auto; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border-radius: 50%; 
-    cursor: pointer; 
-    transition: 0.2s;
+    font-weight: 600; color: #555; width: 32px; height: 32px; margin: 0 auto; display: flex; 
+    align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: 0.2s;
 }
-
 .cal-day:hover:not(.active):not(.text-muted) { background: #f0f5f5; }
-.cal-day.active { 
-    background: #6cb7b7; 
-    color: white; 
-    box-shadow: 0 5px 10px rgba(108, 183, 183, 0.4);
-}
+.cal-day.active { background: #6cb7b7; color: white; box-shadow: 0 5px 10px rgba(108, 183, 183, 0.4); }
 .cal-day.text-muted { color: #ccc; }
 
-.accordion-button:not(.collapsed) {
-    background-color: #f0f7f7;
-    color: #2c3e50;
-    box-shadow: none;
-}
+.accordion-button:not(.collapsed) { background-color: #f0f7f7; color: #2c3e50; box-shadow: none; }
 .accordion-button:focus { box-shadow: none; border-color: rgba(0,0,0,.125); }
 .accordion-item { border: 1px solid #eef5f5; }
 
 /* === RIGHT PANEL STYLE === */
 .ash-right { 
-    width: 340px; 
-    background: white; 
-    border-radius: 35px; 
-    padding: 25px; 
-    box-shadow: -5px 0 20px rgba(0,0,0,0.03); 
-    overflow-y: auto; 
+    width: 340px; background: white; border-radius: 35px; padding: 25px; 
+    box-shadow: -5px 0 20px rgba(0,0,0,0.03); overflow-y: auto; 
 }
 .ash-right::-webkit-scrollbar { display: none; }
 
 .kk-tab { 
-    background: transparent; 
-    border-radius: 12px; 
-    padding: 10px; 
-    text-align: center; 
-    font-size: 0.85rem; 
-    font-weight: 600; 
-    cursor: pointer; 
-    color: #999; 
-    flex: 1; 
-    transition: 0.3s;
+    background: transparent; border-radius: 12px; padding: 10px; text-align: center; 
+    font-size: 0.85rem; font-weight: 600; cursor: pointer; color: #999; flex: 1; transition: 0.3s;
 }
+.kk-tab.active { background: white; color: #6cb7b7; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
 
-.kk-tab.active { 
-    background: white; 
-    color: #6cb7b7; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
+/* === STYLE MODAL SETTINGS === */
+#settings-tabs .nav-link { color: #777; border-radius: 12px; font-weight: 500; transition: 0.3s; }
+#settings-tabs .nav-link:hover { background: #eef7f7; color: #6cb7b7; }
+#settings-tabs .nav-link.active { background: #6cb7b7; color: white; box-shadow: 0 4px 10px rgba(108, 183, 183, 0.3); }
 
-/* === STYLE TAMBAHAN UNTUK MODAL SETTINGS === */
-#settings-tabs .nav-link {
-    color: #777;
-    border-radius: 12px;
-    font-weight: 500;
-    transition: 0.3s;
-}
+.btn-teal { background-color: #6cb7b7; color: white; }
+.btn-teal:hover { background-color: #57a0a0; color: white; }
 
-#settings-tabs .nav-link:hover {
-    background: #eef7f7;
-    color: #6cb7b7;
-}
-
-#settings-tabs .nav-link.active {
-    background: #6cb7b7;
-    color: white;
-    box-shadow: 0 4px 10px rgba(108, 183, 183, 0.3);
-}
-
-.btn-teal {
-    background-color: #6cb7b7;
-    color: white;
-}
-.btn-teal:hover {
-    background-color: #57a0a0;
-    color: white;
-}
-
-/* === ANIMASI SPA (Pindah Halaman Halus) === */
-.view-section {
-    animation: fadeInView 0.5s ease-out forwards;
-}
-
+/* === ANIMASI SPA & KALENDER === */
+.view-section { animation: fadeInView 0.5s ease-out forwards; }
 @keyframes fadeInView {
     from { opacity: 0; transform: scale(0.98) translateY(10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
 }
+.d-none { display: none !important; }
 
-.d-none { 
-    display: none !important; 
-}
-
-/* === KALENDER RAKSASA (Di Menu Jadwal) === */
 .cal-day-big {
-    font-weight: 600; 
-    color: #555; 
-    width: 100%; 
-    height: 50px; 
-    margin: 0 auto; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    border-radius: 15px; 
-    cursor: pointer; 
-    transition: 0.3s;
-    background: #f8fafb;
-    border: 1px solid #eef5f5;
+    font-weight: 600; color: #555; width: 100%; height: 50px; margin: 0 auto; display: flex; 
+    align-items: center; justify-content: center; border-radius: 15px; cursor: pointer; transition: 0.3s;
+    background: #f8fafb; border: 1px solid #eef5f5;
 }
 .cal-day-big:hover:not(.active):not(.text-muted) { background: #eef7f7; color: #6cb7b7; border-color: #6cb7b7; }
 .cal-day-big.active { background: #6cb7b7; color: white; box-shadow: 0 5px 15px rgba(108, 183, 183, 0.4); }
 
-/* Animasi Tombol Buat Janji */
-.pulse-btn {
-    animation: pulseBtn 2s infinite;
-}
+.pulse-btn { animation: pulseBtn 2s infinite; }
 @keyframes pulseBtn {
     0% { box-shadow: 0 0 0 0 rgba(108, 183, 183, 0.7); }
     70% { box-shadow: 0 0 0 15px rgba(108, 183, 183, 0); }

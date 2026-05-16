@@ -61,22 +61,33 @@
                     <div class="col-xl-2 col-md-4">
                         <div class="bg-white rounded-4 shadow-sm h-100 p-3 d-flex flex-column justify-content-between">
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <span class="small fw-bold text-dark" style="font-size: 0.75rem;">Detak Jantung</span>
-                                <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-2" style="font-size: 0.65rem;"><i class="bi bi-heart-fill"></i> 79</span>
+                                <span class="small fw-bold text-dark" style="font-size: 0.75rem;">BMI Pasien</span>
+                                <span id="bmiStatusBadge" class="badge rounded-pill px-2" style="font-size: 0.65rem;">-</span>
                             </div>
-                            <div style="height: 60px; width: 100%; position: relative;">
-                                <canvas id="sparklineChart"></canvas>
+                            
+                            <div class="text-center my-2">
+                                <h3 id="bmiValueText" class="fw-bold text-dark mb-0">0.0</h3>
+                            </div>
+                            
+                            <div class="w-100">
+                                <div class="progress" style="height: 8px; border-radius: 10px; background-color: #eef5f5;">
+                                    <div id="bmiProgressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <div class="d-flex justify-content-between mt-1 text-muted" style="font-size: 0.55rem; font-weight: 600;">
+                                    <span>Kurus</span>
+                                    <span>Ideal</span>
+                                    <span>Obesitas</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-xl-3 col-md-4">
                         <div class="ash-card-queue bg-white rounded-4 shadow-sm h-100 p-3 text-center d-flex flex-column justify-content-center position-relative overflow-hidden">
                             <div class="glow-bg"></div>
                             <h6 class="text-muted small mb-1 position-relative">Antrian Hari Ini</h6>
                             <h2 class="fw-bold text-info mb-1 position-relative" style="letter-spacing: 1px;">A-023</h2>
                             <span class="badge bg-info bg-opacity-10 text-info rounded-pill mx-auto px-2 py-1 position-relative" style="font-size: 0.7rem;">
-                                <i class="bi bi-clock-history me-1"></i> Estimasi 13 Menit
+                                <i class="bi bi-clock-history me-1"></i> Estimasi: 13 Menit
                             </span>
                         </div>
                     </div>
@@ -201,13 +212,10 @@
             </div>
 
             <div id="view-riwayat" class="view-section d-none">
-                
                 <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="d-flex align-items-center gap-3">
-                            <div class="bg-danger bg-opacity-10 rounded-3 text-danger d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
-                                <i class="bi bi-droplet-fill fs-4"></i>
-                            </div>
+                            <i class="bi bi-droplet-fill fs-3 text-danger"></i>
                             <div>
                                 <h5 class="fw-bold mb-0">Tren Gula Darah</h5>
                                 <span class="small text-muted">Statistik 6 Bulan Terakhir</span>
@@ -319,6 +327,7 @@
                 <button type="button" class="btn-close position-absolute top-0 end-0 m-4 z-3" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></button>
                 <div class="modal-body p-0">
                     <div class="d-flex flex-column flex-md-row" style="min-height: 550px;">
+                        
                         <div class="p-4" style="width: 100%; max-width: 250px; background: #f8fafb; border-right: 1px solid #eee;">
                             <h5 class="fw-bold mb-4 text-dark"><i class="bi bi-gear-fill me-2"></i>Settings</h5>
                             <div class="nav flex-column nav-pills" id="settings-tabs" role="tablist">
@@ -330,14 +339,81 @@
                                 <button class="nav-link small text-start mb-2" data-bs-toggle="tab" data-bs-target="#pills-privacy-set" type="button" role="tab"><i class="bi bi-lock me-2"></i> Privasi</button>
                             </div>
                         </div>
+
                         <div class="p-4 p-md-5 flex-grow-1 bg-white" style="max-height: 600px; overflow-y: auto;">
                             <div class="tab-content" id="pills-tabContent">
+                                
                                 <div class="tab-pane fade show active" id="pills-account" role="tabpanel" tabindex="0">
                                     <h6 class="fw-bold mb-4">Pengaturan Akun</h6>
                                     <div class="mb-3"><label class="small fw-bold mb-1">Nama Lengkap</label><input type="text" class="form-control form-control-sm rounded-3" value="Ashley Black"></div>
                                     <div class="mb-3"><label class="small fw-bold mb-1">Ubah Password</label><input type="password" class="form-control form-control-sm rounded-3" placeholder="Masukkan password baru"></div>
                                     <button class="btn btn-teal w-100 mt-3 shadow-sm py-2">Simpan Perubahan</button>
                                 </div>
+
+                                <div class="tab-pane fade" id="pills-family" role="tabpanel" tabindex="0">
+                                    <h6 class="fw-bold mb-4">Manajemen Keluarga</h6>
+                                    <div class="p-3 border rounded-4 mb-3 d-flex justify-content-between align-items-center bg-light">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-card-list fs-4 me-3 text-info"></i>
+                                            <div><h6 class="mb-0 small fw-bold">Data Kartu Keluarga (KK)</h6><span class="small text-muted">No: 3374XXXXXXXXXXX</span></div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-info rounded-pill px-3">Edit KK</button>
+                                    </div>
+                                    <p class="small fw-bold mb-2">Anggota Terdaftar:</p>
+                                    <ul class="list-group list-group-flush mb-4">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 small">John Black (Ayah) <i class="bi bi-trash text-danger"></i></li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center px-0 small">Jane Black (Ibu) <i class="bi bi-trash text-danger"></i></li>
+                                    </ul>
+                                    <button class="btn btn-outline-info w-100 rounded-pill small">+ Tambah Anggota</button>
+                                </div>
+
+                                <div class="tab-pane fade" id="pills-payment" role="tabpanel" tabindex="0">
+                                    <h6 class="fw-bold mb-4">Metode Pembayaran</h6>
+                                    <div class="p-3 border rounded-4 mb-3 d-flex justify-content-between align-items-center bg-light" style="border: 2px solid #6cb7b7 !important;">
+                                        <div class="d-flex align-items-center"><i class="bi bi-bank fs-3 me-3 text-primary"></i><div><h6 class="mb-0 small fw-bold">BCA Virtual Account</h6><span class="small text-muted">BCA •••• 1234</span></div></div>
+                                        <i class="bi bi-check-circle-fill text-success fs-5"></i>
+                                    </div>
+                                    <div class="p-3 border rounded-4 mb-4 d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center"><i class="bi bi-wallet2 fs-3 me-3 text-success"></i><div><h6 class="mb-0 small fw-bold">GoPay / QRIS</h6><span class="small text-muted">0812-XXXX-9999</span></div></div>
+                                        <button class="btn btn-sm btn-outline-danger rounded-pill px-3">Hapus</button>
+                                    </div>
+                                    <button class="btn btn-outline-info w-100 rounded-pill small">+ Tambah Metode Pembayaran</button>
+                                </div>
+
+                                <div class="tab-pane fade" id="pills-lang" role="tabpanel" tabindex="0">
+                                    <h6 class="fw-bold mb-4">Bahasa & Tampilan</h6>
+                                    <label class="small fw-bold mb-2">Pilih Bahasa</label>
+                                    <select class="form-select form-select-sm mb-4 rounded-3"><option selected>Indonesia (ID)</option><option>English (US)</option></select>
+                                    <label class="small fw-bold mb-2">Tema Aplikasi</label>
+                                    <div class="row g-2">
+                                        <div class="col-6"><div class="border rounded-4 p-3 text-center shadow-sm" style="border: 2px solid #6cb7b7 !important;"><i class="bi bi-sun fs-4 text-warning"></i><br><span class="small">Light Mode</span></div></div>
+                                        <div class="col-6"><div class="border rounded-4 p-3 text-center text-muted" style="background: #2c3e50;"><i class="bi bi-moon-stars fs-4 text-white"></i><br><span class="small text-white">Dark Mode</span></div></div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="pills-bpjs-set" role="tabpanel" tabindex="0">
+                                    <h6 class="fw-bold mb-4">Layanan BPJS Kesehatan</h6>
+                                    <div class="p-3 border rounded-4 mb-4">
+                                        <div class="d-flex justify-content-between mb-2"><span class="small text-muted">Status Sinkronisasi</span><span class="badge bg-success rounded-pill">Terhubung</span></div>
+                                        <h6 class="fw-bold mb-1">000192837465</h6>
+                                        <p class="small text-muted mb-0">Terakhir sinkron: 1 jam yang lalu</p>
+                                    </div>
+                                    <button class="btn btn-info w-100 text-white rounded-pill py-2 shadow-sm">Sinkronkan Data Sekarang</button>
+                                </div>
+
+                                <div class="tab-pane fade" id="pills-privacy-set" role="tabpanel" tabindex="0">
+                                    <h6 class="fw-bold mb-4">Keamanan Akun</h6>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div><h6 class="mb-0 small fw-bold">Login Fingerprint/FaceID</h6></div>
+                                        <div class="form-check form-switch"><input class="form-check-input" type="checkbox" checked></div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div><h6 class="mb-0 small fw-bold">Login Device</h6><span class="text-muted small">Windows 11 (Perangkat Ini)</span></div>
+                                        <button class="btn btn-sm btn-outline-danger py-0">Logout</button>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -347,106 +423,9 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script src="../../js/script.js"></script>
 
-    <script>
-        // === LOGIKA RENDER GRAFIK CHART.JS ===
-        document.addEventListener("DOMContentLoaded", function() {
-            
-            // 1. GRAFIK KECIL (Sparkline) di HOME
-            const ctxSpark = document.getElementById('sparklineChart').getContext('2d');
-            new Chart(ctxSpark, {
-                type: 'line',
-                data: {
-                    labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
-                    datasets: [{
-                        data: [72, 75, 71, 78, 82, 76, 79],
-                        borderColor: '#ff6b6b', // Warna Garis: Merah/Pink
-                        borderWidth: 3,
-                        tension: 0.4, // Melengkung halus
-                        pointRadius: 0 // Sembunyikan titik
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                    scales: {
-                        x: { display: false },
-                        y: { display: false, min: 60, max: 90 }
-                    },
-                    layout: { padding: 0 }
-                }
-            });
-
-            // 2. GRAFIK BESAR (Gula Darah) di RIWAYAT
-            const ctxRiwayat = document.getElementById('riwayatChart').getContext('2d');
-            
-            // Membuat efek gradasi warna di bawah grafik
-            let gradient = ctxRiwayat.createLinearGradient(0, 0, 0, 220);
-            gradient.addColorStop(0, 'rgba(108, 183, 183, 0.4)'); // Teal transparan (Warna utama MediFlow)
-            gradient.addColorStop(1, 'rgba(108, 183, 183, 0)');
-
-            new Chart(ctxRiwayat, {
-                type: 'line',
-                data: {
-                    labels: ['Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep'],
-                    datasets: [{
-                        label: 'Gula Darah (mg/dL)',
-                        data: [115, 110, 120, 105, 95, 90],
-                        borderColor: '#6cb7b7', // Warna Garis: Teal/Cyan
-                        backgroundColor: gradient,
-                        borderWidth: 3,
-                        tension: 0.4, // Melengkung halus
-                        fill: true, // Isi warna gradasi
-                        pointBackgroundColor: '#fff',
-                        pointBorderColor: '#6cb7b7',
-                        pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 7
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { 
-                            beginAtZero: false, 
-                            min: 70, max: 130, 
-                            grid: { borderDash: [5, 5], color: '#f0f0f0' } 
-                        },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
-        });
-
-        // FUNGSI ANIMASI SPA (Pindah Halaman Tanpa Refresh)
-        function switchView(viewId, element) {
-            document.querySelectorAll('.view-section').forEach(view => { view.classList.add('d-none'); });
-            document.getElementById(viewId).classList.remove('d-none');
-
-            document.querySelectorAll('.ash-sidebar .nav-wrapper').forEach(nav => { nav.classList.remove('active'); });
-            if(element) { element.classList.add('active'); }
-        }
-
-        // FUNGSI LOGOUT DAN GANTI PROFIL KELUARGA
-        function logout() { window.location.href = '../../index.html'; }
-        
-        function gantiAshley(nama, role, blood, height, weight, element) {
-            document.getElementById('ashNameTitle').innerText = nama + "!";
-            document.getElementById('ashNameProfile').innerText = nama + " Black";
-            document.getElementById('ashEmail').innerText = nama.toLowerCase() + ".black@gmail.com";
-            document.getElementById('ashBlood').innerText = blood;
-            document.getElementById('ashHeight').innerText = height;
-            document.getElementById('ashWeight').innerText = weight;
-            document.getElementById('ashFoto').src = `https://ui-avatars.com/api/?name=${nama}&background=6cb7b7&color=fff`;
-
-            document.querySelectorAll('.kk-tab').forEach(tab => tab.classList.remove('active'));
-            element.classList.add('active');
-        }
-    </script>
 </body>
 </html>
