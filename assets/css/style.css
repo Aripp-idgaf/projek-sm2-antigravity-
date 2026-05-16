@@ -11,6 +11,15 @@ body.bg-pasien {
     font-family: 'Quicksand', sans-serif; 
 }
 
+:root {
+    --mediflow-blue: #38c8e6;
+    --mediflow-blue-dark: #2ab5d3;
+    --mediflow-blue-light: rgba(56, 200, 230, 0.1);
+}
+
+.bg-teal-mediflow { background-color: var(--mediflow-blue) !important; color: white !important; }
+.text-teal-mediflow { color: var(--mediflow-blue) !important; }
+
 @keyframes fadeIn { 
     from { opacity: 0; transform: translateY(10px); } 
     to { opacity: 1; transform: translateY(0); } 
@@ -25,19 +34,19 @@ body.bg-pasien {
     animation: fadeIn 0.5s ease-out;
 }
 
-/* === EMERGENCY BUTTON === */
+/* 🔥 TOMBOL TELEPON DARURAT DIGESER AGAR TIDAK MENGHALANGI 🔥 */
 .btn-emergency {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: -100px; /* Sembunyikan jika mengganggu, atau ubah posisinya ke pojok kiri bawah */
+    left: 30px;
     z-index: 1000;
-    width: 60px;
-    height: 60px;
+    width: 50px; 
+    height: 50px;
     border-radius: 50%;
     background: linear-gradient(135deg, #ff4d4d, #c82333);
     color: white;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,110 +64,93 @@ body.bg-pasien {
 
 /* === SIDEBAR STYLE === */
 .ash-sidebar { 
-    width: 90px; 
-    background: white; 
-    border-radius: 30px; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    padding: 25px 0; 
-    color: #6cb7b7;
-    height: calc(100vh - 30px);
+    width: 90px; background: white; border-radius: 30px; 
+    display: flex; flex-direction: column; align-items: center; 
+    padding: 25px 0; color: var(--mediflow-blue); height: calc(100vh - 30px);
 }
-
 .nav-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 5px 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 100%; margin-bottom: 15px; cursor: pointer; transition: all 0.3s ease; padding: 5px 0;
 }
-
 .nav-icon { 
-    width: 45px; 
-    height: 45px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    border-radius: 14px; 
-    font-size: 1.3rem; 
-    color: #a0c4c4; 
-    transition: 0.3s;
+    width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; 
+    border-radius: 14px; font-size: 1.3rem; color: #a0c4c4; transition: 0.3s;
 }
-
-.nav-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    margin-top: 4px;
-    color: #a0c4c4;
-    text-transform: uppercase;
-}
+.nav-label { font-size: 0.65rem; font-weight: 700; margin-top: 4px; color: #a0c4c4; text-transform: uppercase; }
 
 .nav-wrapper:hover .nav-icon, .nav-wrapper.active .nav-icon { 
-    color: white; background: #6cb7b7; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(108, 183, 183, 0.4);
+    color: white; background: var(--mediflow-blue); transform: translateY(-3px); box-shadow: 0 5px 15px var(--mediflow-blue-light);
 }
-.nav-wrapper:hover .nav-label, .nav-wrapper.active .nav-label { color: #6cb7b7; }
+.nav-wrapper:hover .nav-label, .nav-wrapper.active .nav-label { color: var(--mediflow-blue); }
 
 /* === MAIN CONTENT STYLE === */
-.ash-main { 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    overflow-y: auto; 
-    padding: 0 10px; 
-    padding-right: 20px;
-}
-
+.ash-main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; padding: 0 10px; padding-right: 20px;}
 .ash-main::-webkit-scrollbar { width: 6px; }
 .ash-main::-webkit-scrollbar-track { background: transparent; }
 .ash-main::-webkit-scrollbar-thumb { background: #d1e5e5; border-radius: 10px; }
 
+/* 🔥 CARD WELCOME & ANIMASI DOKTER MELAYANG 🔥 */
 .ash-card-wel { 
-    background: linear-gradient(135deg, #57b7b7, #74c6c6); 
-    border-radius: 30px; 
-    padding: 30px; 
-    color: white; 
-    position: relative; 
-    overflow: hidden; 
-    height: 100%; 
+    border-radius: 25px; 
+    min-height: 220px;
+    display: flex;
+    align-items: center;
 }
 
+.wel-doctor-img {
+    position: absolute; /* Pastikan ini ada agar tidak merusak layout */
+    bottom: -20px; 
+    right: -10px; 
+    height: 125%; 
+    z-index: 1;
+    /* Ini adalah pemanggilan animasinya: durasi 4 detik, bergerak halus, dan infinite (tanpa henti) */
+    animation: floatDoctor 4s ease-in-out infinite; 
+}
+
+/* Ini adalah rumus gerakannya (Keyframes) */
+@keyframes floatDoctor {
+    0%, 100% { transform: translateY(0); }         /* Posisi awal dan akhir (di bawah) */
+    50% { transform: translateY(-15px); }          /* Menit ke-50% dia naik ke atas sejauh 15 pixel */
+}
+
+/* =========================================== */
+
 .ash-card-queue {
-    border: 2px solid rgba(13, 202, 240, 0.5);
-    box-shadow: 0 0 20px rgba(13, 202, 240, 0.15) !important;
+    border: 2px solid rgba(56, 200, 230, 0.5);
+    box-shadow: 0 0 20px rgba(56, 200, 230, 0.15) !important;
 }
 
 .ash-card-queue .glow-bg {
     position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(13, 202, 240, 0.1) 0%, rgba(255,255,255,0) 70%);
+    background: radial-gradient(circle, rgba(56, 200, 230, 0.1) 0%, rgba(255,255,255,0) 70%); 
     animation: rotateGlow 10s linear infinite; z-index: 0;
 }
-
 @keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-.ash-calendar { background: white; border-radius: 30px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
+/* 🔥 KALENDER (BACKGROUND LEMBUT) 🔥 */
+.ash-calendar { 
+    background: #f0f8f9; 
+    border-radius: 30px; 
+    padding: 30px; 
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.01); 
+}
 
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; gap: 8px 0; }
-
 .cal-day { 
     font-weight: 600; color: #555; width: 32px; height: 32px; margin: 0 auto; display: flex; 
     align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: 0.2s;
 }
-.cal-day:hover:not(.active):not(.text-muted) { background: #f0f5f5; }
-.cal-day.active { background: #6cb7b7; color: white; box-shadow: 0 5px 10px rgba(108, 183, 183, 0.4); }
+.cal-day:hover:not(.active):not(.text-muted) { background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+.cal-day.active { background: var(--mediflow-blue); color: white; box-shadow: 0 5px 10px var(--mediflow-blue-light); } 
 .cal-day.text-muted { color: #ccc; }
 
-.accordion-button:not(.collapsed) { background-color: #f0f7f7; color: #2c3e50; box-shadow: none; }
-.accordion-button:focus { box-shadow: none; border-color: rgba(0,0,0,.125); }
-.accordion-item { border: 1px solid #eef5f5; }
+.accordion-button:not(.collapsed) { background-color: transparent; color: #2c3e50; box-shadow: none; }
+.accordion-button:focus { box-shadow: none; }
+.accordion-item { border: none; }
 
 /* === RIGHT PANEL STYLE === */
 .ash-right { 
-    width: 340px; background: white; border-radius: 35px; padding: 25px; 
+    width: 350px; background: white; border-radius: 35px; padding: 25px; 
     box-shadow: -5px 0 20px rgba(0,0,0,0.03); overflow-y: auto; 
 }
 .ash-right::-webkit-scrollbar { display: none; }
@@ -167,17 +159,11 @@ body.bg-pasien {
     background: transparent; border-radius: 12px; padding: 10px; text-align: center; 
     font-size: 0.85rem; font-weight: 600; cursor: pointer; color: #999; flex: 1; transition: 0.3s;
 }
-.kk-tab.active { background: white; color: #6cb7b7; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.kk-tab.active { background: white; color: var(--mediflow-blue); box-shadow: 0 2px 10px rgba(0,0,0,0.05); } 
 
-/* === STYLE MODAL SETTINGS === */
-#settings-tabs .nav-link { color: #777; border-radius: 12px; font-weight: 500; transition: 0.3s; }
-#settings-tabs .nav-link:hover { background: #eef7f7; color: #6cb7b7; }
-#settings-tabs .nav-link.active { background: #6cb7b7; color: white; box-shadow: 0 4px 10px rgba(108, 183, 183, 0.3); }
+.btn-teal { background-color: var(--mediflow-blue); color: white; border:none;} 
+.btn-teal:hover { background-color: var(--mediflow-blue-dark); color: white; }
 
-.btn-teal { background-color: #6cb7b7; color: white; }
-.btn-teal:hover { background-color: #57a0a0; color: white; }
-
-/* === ANIMASI SPA & KALENDER === */
 .view-section { animation: fadeInView 0.5s ease-out forwards; }
 @keyframes fadeInView {
     from { opacity: 0; transform: scale(0.98) translateY(10px); }
@@ -185,17 +171,87 @@ body.bg-pasien {
 }
 .d-none { display: none !important; }
 
-.cal-day-big {
-    font-weight: 600; color: #555; width: 100%; height: 50px; margin: 0 auto; display: flex; 
-    align-items: center; justify-content: center; border-radius: 15px; cursor: pointer; transition: 0.3s;
-    background: #f8fafb; border: 1px solid #eef5f5;
+/* FADE-OUT SAAT LOGIN */
+body.fade-out { animation: fadeOutView 0.8s ease-in-out forwards; }
+@keyframes fadeOutView {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.05); filter: blur(5px); }
 }
-.cal-day-big:hover:not(.active):not(.text-muted) { background: #eef7f7; color: #6cb7b7; border-color: #6cb7b7; }
-.cal-day-big.active { background: #6cb7b7; color: white; box-shadow: 0 5px 15px rgba(108, 183, 183, 0.4); }
 
-.pulse-btn { animation: pulseBtn 2s infinite; }
-@keyframes pulseBtn {
-    0% { box-shadow: 0 0 0 0 rgba(108, 183, 183, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(108, 183, 183, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(108, 183, 183, 0); }
+.btn-notif-mediflow { width: 32px; height: 32px; background: transparent; border: none; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+.notif-dot { top: 5px; right: 5px; padding: 0.2rem !important; }
+
+/* 🔥 DESAIN PAYMENT CARD BARU 🔥 */
+.payment-card-mediflow {
+    overflow: visible !important; /* Supaya tombol merah di ujung bisa terlihat bulat penuh */
+}
+
+.wallet-bg-icon { 
+    bottom: -30px; 
+    right: -20px; 
+    font-size: 8rem !important; 
+    transform: rotate(-15deg); 
+    opacity: 0.2;
+    color: white;
+}
+
+/* 🔥 TOMBOL MERAH UNTUK PEMBAYARAN (Sesuai Gambar 2) 🔥 */
+.btn-pay-red {
+    position: absolute;
+    bottom: -15px; /* Menempel agak keluar di kanan bawah */
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    background-color: #dc3545; /* Merah */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 3;
+    transition: transform 0.2s ease;
+}
+
+.btn-pay-red:hover {
+    transform: scale(1.1);
+    background-color: #c82333;
+}
+
+/* Akordion Riwayat */
+.accordion-button::after {
+    filter: invert(53%) sepia(10%) saturate(732%) hue-rotate(152deg) brightness(97%) contrast(92%); 
+}
+.riwayat-home-list .riwayat-icon {
+    width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+    color: var(--mediflow-blue); box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* 🔥 CARD WELCOME & ANIMASI DOKTER MELAYANG 🔥 */
+.ash-card-wel { 
+    background: linear-gradient(135deg, #38c8e6, #2ab5d3) !important; /* Biru MediFlow */
+}
+
+.wel-doctor-img {
+    bottom: -20px; 
+    right: 5px; 
+    height: 135%; /* Dibuat besar menonjol seperti di gambar referensi */
+    z-index: 1;
+    
+    /* 🔥 DUA ANIMASI SEKALIGUS: Muncul dari bawah, lalu melayang tanpa henti 🔥 */
+    animation: slideUp 0.8s ease-out forwards, floatDoctor 4s ease-in-out 0.8s infinite; 
+}
+
+/* Animasi 1: Muncul dari bawah ke atas saat halaman dibuka */
+@keyframes slideUp {
+    from { transform: translateY(150px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Animasi 2: Melayang perlahan naik turun tanpa henti */
+@keyframes floatDoctor {
+    0%, 100% { transform: translateY(0); }         
+    50% { transform: translateY(-15px); }          
 }
