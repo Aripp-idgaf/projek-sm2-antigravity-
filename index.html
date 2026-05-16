@@ -12,13 +12,13 @@
         /* RESET DASAR */
         * { box-sizing: border-box; }
 
-        /* --- 1. ANIMASI MELAYANG HALUS --- */
+        /* --- ANIMASI MELAYANG HALUS --- */
         @keyframes floatAnim {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-25px) rotate(8deg); }
         }
 
-        /* --- 2. LATAR BELAKANG BIRU MUDA BERSIH --- */
+        /* --- LATAR BELAKANG BIRU MUDA BERSIH --- */
         body.login-mode {
             background-color: #e0f7fa; 
             min-height: 100vh;
@@ -32,7 +32,7 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* --- 3. SISTEM IKON BACKGROUND ALAT MEDIS (RAMAI) --- */
+        /* --- SISTEM IKON BACKGROUND ALAT MEDIS --- */
         .bg-icon-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -61,14 +61,13 @@
         .i11 { top: 20%; left: 40%; font-size: 3.5rem; animation-delay: 4.5s; }
         .i12 { bottom: 20%; right: 45%; font-size: 4.5rem; animation-delay: 3.2s; }
 
-        /* --- 4. LAYOUT LOGIN UTAMA (LEBAR & LEGA) --- */
+        /* --- LAYOUT LOGIN UTAMA --- */
         .login-wrapper {
             position: relative;
             z-index: 10;
         }
 
         .login-split {
-            /* 🔥 EFEK SHADOW BARU YANG ELEGAN ADA DI SINI 🔥 */
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18), 0 5px 15px rgba(0, 0, 0, 0.08);
             border-radius: 20px;
             overflow: hidden;
@@ -111,12 +110,10 @@
             color: white; font-weight: 600; font-size: 1.3rem;
             position: relative; z-index: 2;
         }
-        /* Menggunakan icon detak jantung seperti di dashboard */
         .cal-logo i { font-size: 1.8rem; margin-right: 12px; color: #38c8e6; }
 
         /* Ikon Header Form Kanan */
         .form-logo { text-align: center; margin-bottom: 10px; }
-        /* Menggunakan icon detak jantung seperti di dashboard */
         .form-logo i { font-size: 4.5rem; color: #38c8e6; }
 
         /* Input Styling */
@@ -182,7 +179,7 @@
 
                     <div class="input-icon">
                         <i class="bi bi-person"></i>
-                        <input type="text" id="loginUsername" class="cal-input" placeholder="Enter User Name (pasien/dokter/admin)">
+                        <input type="text" id="loginUsername" class="cal-input" placeholder="Ketik: pasien / dokter / admin">
                     </div>
                     <div class="input-icon">
                         <i class="bi bi-envelope"></i>
@@ -198,7 +195,7 @@
                         <label for="terms" style="color: #777;"> I read and agree to the <a href="#" style="color: #38c8e6; text-decoration: none;">Terms of use</a></label>
                     </div>
 
-                    <button class="btn-cal" onclick="prosesLogin()">Sign In</button>
+                    <button class="btn-cal" onclick="prosesLoginManual()">Sign In</button>
 
                     <div class="text-center mt-3" style="font-size: 0.85rem; color: #999;">
                         Need an account? <a href="#" style="color: #38c8e6; text-decoration: none; font-weight: 600;">Sign Up</a>
@@ -212,10 +209,33 @@
     <script src="js/script.js"></script>
 
     <script>
+        // 💥 LOGIKA LOGIN PINTAR (SUDAH DIUPDATE NAMA FILENYA) 💥
+        function prosesLoginManual() {
+            // Ambil apa yang diketik user di kotak username
+            let inputUser = document.getElementById("loginUsername").value.toLowerCase().trim();
+
+            if (inputUser === "dokter") {
+                window.location.href = "pages/dokter/dashboard.dokter.html";
+            } else if (inputUser === "pasien") {
+                window.location.href = "pages/pasien/dashboard.pasien.html";
+            } else if (inputUser === "admin") {
+                window.location.href = "pages/admin/dashboard.admin.html";
+            } else {
+                alert("Silakan ketik 'pasien', 'dokter', atau 'admin' pada kolom User Name untuk melanjutkan uji coba sistem.");
+            }
+        }
+
+        // SLIDER GAMBAR KIRI
         const sliderImg = document.getElementById('slider-image');
+        const images = [
+            "images/wallpaper/rs1.jpg", 
+            "images/wallpaper/rs2.jpg", 
+            "images/wallpaper/rs3.jpg", 
+            "images/wallpaper/rs4.jpg", 
+            "images/wallpaper/rs5.png"
+        ];
         
-        const images = ["images/wallpaper/rs1.jpg", "images/wallpaper/rs2.jpg", "images/wallpaper/rs3.jpg", "images/wallpaper/rs4.jpg", "images/wallpaper/rs5.png"];
-        
+        // Preload images agar transisi tidak ngelag
         images.forEach(src => { let i = new Image(); i.src = src; });
         
         let i = 0;
