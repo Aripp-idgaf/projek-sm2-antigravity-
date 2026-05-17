@@ -12,29 +12,29 @@
         /* === GLOBAL SETTINGS === */
         body { 
             font-family: 'Poppins', sans-serif; 
-            background-color: #f4f8f8; 
+            background-color: #EBF0F5; 
             margin: 0; 
             padding: 0; 
-            overflow-x: hidden; 
+            overflow: hidden; 
         }
 
         :root {
-            /* TEMA WARNA MEDIFLOW (TEAL) */
             --primary-teal: #38c8e6; 
             --secondary-teal: #2ab5d3;
-            --text-dark: #2c3e50;
-            --text-muted: #8e98b0;
+            --text-dark: #1e293b; 
+            --text-muted: #64748b;
             --card-radius: 20px;
             
-            /* WARNA STATUS JADWAL */
             --st-confirmed: #2ecc71;
             --st-waiting: #f39c12;
             --st-cancelled: #e74c3c;
-            --st-completed: #38c8e6;
         }
 
         .text-primary { color: var(--primary-teal) !important; }
         .bg-primary { background-color: var(--primary-teal) !important; }
+
+        .btn-teal { background-color: var(--primary-teal) !important; border-color: var(--primary-teal) !important; color: white !important; }
+        .btn-teal:hover { background-color: var(--secondary-teal) !important; }
 
         /* === LAYOUT UTAMA === */
         .main-wrapper { 
@@ -43,7 +43,6 @@
             padding: 15px; 
             gap: 25px; 
             box-sizing: border-box; 
-            overflow: hidden; 
             width: 100vw;
         }
 
@@ -58,8 +57,10 @@
             align-items: center; 
             padding: 25px 0; 
             color: var(--primary-teal); 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); 
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.02); 
+            border-right: 1px solid #E2E8F0;
             z-index: 50;
+            height: 100%; 
         }
         
         .sidebar-logo { font-weight: 700; font-size: 0.8rem; text-align: center; line-height: 1.2; margin-bottom: 30px; color: var(--primary-teal); }
@@ -72,172 +73,234 @@
         .nav-item i { font-size: 1.4rem; margin-bottom: 3px; }
         .nav-label { font-size: 0.55rem; font-weight: 700; text-transform: uppercase; }
         
-        .nav-item:hover, .nav-item.active { 
-            background-color: var(--primary-teal); color: white; box-shadow: 0 5px 15px rgba(45, 186, 214, 0.3); 
-        }
-        .nav-item.logout { margin-top: auto; color: #ff4d4d; margin-bottom: 0; background: transparent; box-shadow: none;}
-        .nav-item.logout:hover { background-color: #ff4d4d; color: white; }
+        .nav-item:hover, .nav-item.active { background-color: var(--primary-teal); color: white; box-shadow: 0 5px 15px rgba(45, 186, 214, 0.3); }
+        .nav-item.logout { margin-top: auto; color: #ef4444; margin-bottom: 0; background: transparent; box-shadow: none;}
+        .nav-item.logout:hover { background-color: #ef4444; color: white; }
 
         /* === KONTEN UTAMA === */
         .main-content { 
-            flex: 1; 
-            min-width: 0; 
-            display: flex; 
-            flex-direction: column; 
-            overflow-y: auto; 
-            padding-right: 5px; 
-            overflow-x: hidden; 
+            flex: 1; min-width: 0; display: flex; flex-direction: column; overflow-y: auto; padding-right: 10px; padding-bottom: 40px; 
         }
-        .main-content::-webkit-scrollbar { display: none; }
+        .main-content::-webkit-scrollbar { width: 6px; }
+        .main-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .main-content::-webkit-scrollbar-track { background: transparent; }
         
         .view-section { animation: fadeInView 0.4s ease-out forwards; }
         @keyframes fadeInView { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .d-none { display: none !important; }
 
         /* === HEADER === */
-        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .search-box {
-            background: white; border-radius: 30px; padding: 10px 20px; width: 50%; display: flex; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-        }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-shrink: 0; }
+        .search-box { background: white; border-radius: 30px; padding: 10px 20px; width: 50%; display: flex; align-items: center; box-shadow: 0px 4px 15px rgba(149, 157, 165, 0.1); }
         .search-box input { border: none; outline: none; width: 100%; margin-left: 10px; font-family: 'Poppins'; font-size: 0.85rem; color: #555;}
-        
-        .icon-btn {
-            width: 45px; height: 45px; background: white; border-radius: 15px; display: inline-flex; justify-content: center; align-items: center; margin-left: 10px; color: var(--text-muted); box-shadow: 0 5px 15px rgba(0,0,0,0.02); cursor: pointer; border: none; position: relative;
-        }
+        .icon-btn { width: 45px; height: 45px; background: white; border-radius: 15px; display: inline-flex; justify-content: center; align-items: center; margin-left: 10px; color: var(--text-muted); box-shadow: 0px 4px 15px rgba(149, 157, 165, 0.1); cursor: pointer; border: none; position: relative;}
 
         /* === COMPONENTS === */
-        .med-card { background: white; border-radius: var(--card-radius); padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.02); }
-        
-        /* 🔥 BANNER & CLIP-PATH MAGIC 🔥 */
-        .welcome-banner {
-            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-teal)); 
-            border-radius: 25px; 
-            padding: 30px 40px; 
-            color: white; 
-            position: relative; 
-            overflow: visible; /* Wajib visible agar kepala tembus atas */
-            display: flex; 
-            align-items: center; 
-            box-shadow: 0 10px 25px rgba(56, 200, 230, 0.2); 
-            height: 180px; 
-            margin-bottom: 20px;
-        }
-        .banner-text { z-index: 2; position: relative; width: 65%; }
-        .banner-badge { background: rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; display: inline-block; margin-bottom: 12px; }
+        .med-card { background: white; border-radius: var(--card-radius); padding: 25px; box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.15); }
+        .card-title-top { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
 
-        /* BUNGKUS DOKTER DENGAN CSS CROP KHUSUS */
-        .hero-doctor-wrapper {
-            position: absolute; 
-            bottom: 0; 
-            right: 0; /* Mentok kanan tanpa jarak */
-            width: 250px; 
-            height: 135%; /* Kepala tetap bisa tembus ke atas */
-            z-index: 10; 
-            cursor: pointer;
-            
-            /* KUNCI RAHASIA: inset(top right bottom left round border-radius) */
-            /* Ini akan membiarkan bagian atas tembus, membiarkan kiri tembus untuk pesan hallo, tapi memotong kanan & bawah persis mengikuti garis dan lengkungan banner! */
+        /* BANNER */
+        .welcome-banner { 
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-teal)); 
+            border-radius: 25px; padding: 30px 40px; color: white; position: relative; 
+            overflow: visible; 
+            display: flex; align-items: center; 
+            box-shadow: 0px 10px 30px rgba(56, 200, 230, 0.25); height: 190px; margin-bottom: 20px;
+        }
+
+        .banner-pattern-mask {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 25px; overflow: hidden; z-index: 1; pointer-events: none;
+        }
+        
+        /* STYLE CORAK PURE CSS */
+        .banner-bg-shapes {
+            position: absolute; top: -50px; left: -50px; width: 120%; height: 150%; 
+            display: flex; flex-wrap: wrap; gap: 2.5rem; 
+            justify-content: space-around; align-items: center; 
+            opacity: 0.2;
+        }
+        .banner-bg-shapes i { font-size: 3rem; color: #ffffff; }
+        .banner-bg-shapes i:nth-child(odd) { transform: rotate(15deg); }
+        .banner-bg-shapes i:nth-child(even) { transform: rotate(-25deg) scale(1.1); }
+        .banner-bg-shapes i:nth-child(3n) { transform: rotate(45deg) scale(0.9); }
+        .banner-bg-shapes i:nth-child(5n) { transform: rotate(-10deg) scale(1.2); }
+
+        .banner-text { z-index: 3; position: relative; width: 65%; }
+        .banner-badge { background: rgba(255,255,255,0.2); padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; display: inline-block; margin-bottom: 12px; }
+        
+        @keyframes slideInLeftFade { 0% { opacity: 0; transform: translateX(-30px); } 100% { opacity: 1; transform: translateX(0); } }
+        .animate-slide-left { animation: slideInLeftFade 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        /* BUNGKUS DOKTER */
+        .hero-doctor-wrapper { 
+            position: absolute; bottom: 0; right: 0; 
+            width: 250px; height: 145%; z-index: 10; cursor: pointer; 
             clip-path: inset(-50% 0 0 -50% round 0 0 25px 0); 
+            overflow: visible; 
         }
         
-        .wel-doctor-img {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            height: 100%; 
-            width: 100%; 
-            object-fit: contain; 
-            object-position: bottom right; 
-            transform-origin: bottom right; /* Kalau di hover, dia membesar ke kiri atas, jadi kanan-bawahnya tetap rapat! */
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        @keyframes doctorPopIn {
+            0% { opacity: 0; transform: scale(0.85) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         
-        /* Gelembung Pesan Hallo - Digeser Ke Kiri Wajah */
-        .bubble-hallo {
-            position: absolute;
-            top: 25px; 
-            right: 80%; /* Digeser ke sebelah kiri wajah dokter */
-            background: white;
-            color: var(--primary-teal);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-            opacity: 0;
-            transform: translateY(15px) scale(0.8);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            white-space: nowrap;
-            z-index: 5;
+        .wel-doctor-img { 
+            position: absolute; bottom: 0; right: 0; 
+            height: 100%; width: 100%; 
+            object-fit: contain; object-position: bottom right; 
+            transform-origin: bottom right; 
+            z-index: 10; 
+            opacity: 0; animation: doctorPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation-delay: 0.2s; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        
+        .bubble-hallo { 
+            position: absolute; top: 25px; right: 80%; background: white; color: var(--primary-teal); padding: 8px 18px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; box-shadow: 0 5px 15px rgba(0,0,0,0.15); opacity: 0; transform: translateY(15px) scale(0.8); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); white-space: nowrap; 
+            z-index: 15; 
             pointer-events: none;
         }
+        .bubble-hallo::after { content: ''; position: absolute; top: 50%; right: -8px; transform: translateY(-50%); border-width: 8px 0 8px 10px; border-style: solid; border-color: transparent transparent transparent white; display: block; width: 0;}
         
-        /* Ekor Gelembung Menunjuk ke Kanan (Ke arah Dokter) */
-        .bubble-hallo::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -8px;
-            transform: translateY(-50%);
-            border-width: 8px 0 8px 10px;
-            border-style: solid;
-            border-color: transparent transparent transparent white;
-            display: block;
-            width: 0;
-        }
-
-        /* Efek Hover */
-        .hero-doctor-wrapper:hover .wel-doctor-img { transform: scale(1.05); }
+        .hero-doctor-wrapper:hover .wel-doctor-img { transform: scale(1.05) translateY(-5px); }
         .hero-doctor-wrapper:hover .bubble-hallo { opacity: 1; transform: translateY(0) scale(1); }
 
-        /* QUICK ACTIONS */
-        .quick-btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px;
-            font-weight: 600; font-size: 0.8rem; cursor: pointer; transition: 0.2s; border: none; width: 100%;
+        .pulse-dot-bright { 
+            width: 12px; height: 12px; 
+            background-color: #00FF00; 
+            border-radius: 50%; 
+            display: inline-block; 
+            box-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00; 
+            animation: brightPulse 2s infinite; 
         }
-        .btn-add { background: #e8f9e8; color: #27ae60; }
-        .btn-add:hover { background: #27ae60; color: white; }
-        .btn-block { background: #fff4e6; color: #e67e22; }
-        .btn-block:hover { background: #e67e22; color: white; }
-        .btn-cancel { background: #ffebeb; color: #c0392b; }
-        .btn-cancel:hover { background: #c0392b; color: white; }
+        @keyframes brightPulse { 
+            0% { box-shadow: 0 0 10px #00FF00, 0 0 0 0 rgba(0, 255, 0, 0.7); }
+            70% { box-shadow: 0 0 10px #00FF00, 0 0 0 15px rgba(0, 255, 0, 0); }
+            100% { box-shadow: 0 0 10px #00FF00, 0 0 0 0 rgba(0, 255, 0, 0); }
+        }
+        
+        .pesta-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible; z-index: 1; pointer-events: none; }
+        .medical-particle { position: absolute; pointer-events: none; opacity: 1; z-index: 1; text-shadow: 0 0 10px rgba(255, 255, 255, 0.6); }
+        
+        @keyframes pestaExplosion {
+            0% { transform: translate(0, 0) rotate(0deg) scale(0.5); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(1.5); opacity: 0; }
+        }
+
+        /* KARTU STATISTIK */
+        .counter-card { background: white; border-radius: var(--card-radius); padding: 20px 25px; box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.15); display: flex; align-items: center; gap: 15px; transition: transform 0.3s; cursor: pointer;}
+        .counter-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(56, 200, 230, 0.2); }
+        .counter-icon { width: 55px; height: 55px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-size: 1.6rem; }
+        .counter-number { font-size: 1.8rem; font-weight: 700; line-height: 1; margin-bottom: 5px; color: var(--text-dark); }
+        .counter-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+
+        /* QUICK ACTIONS */
+        .quick-actions-container { background: white; border-radius: var(--card-radius); padding: 20px; box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.15); display: flex; flex-direction: column; gap: 10px; height: 100%; justify-content: center;}
+        .quick-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; font-weight: 600; font-size: 0.75rem; cursor: pointer; transition: 0.2s; border: none; width: 100%;}
+        .btn-add { background: #e8f9e8; color: #16a34a; } .btn-add:hover { background: #16a34a; color: white; }
+        .btn-block { background: #fff4e6; color: #d97706; } .btn-block:hover { background: #d97706; color: white; }
+        .btn-cancel { background: #ffebeb; color: #dc2626; } .btn-cancel:hover { background: #dc2626; color: white; }
 
         /* NEXT PATIENT CARD */
-        .next-patient-card {
-            background: white; border: 2px solid var(--primary-teal); border-radius: var(--card-radius); padding: 20px; position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 5px 15px rgba(56, 200, 230, 0.1);
-        }
-        .pulse-dot {
-            width: 10px; height: 10px; background-color: var(--st-confirmed); border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); animation: greenPulse 2s infinite;
-        }
+        .next-patient-card { background: white; border: none; border-radius: var(--card-radius); padding: 20px 25px; position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center; box-shadow: 0px 8px 24px rgba(149, 157, 165, 0.15);}
+        .pulse-dot { width: 10px; height: 10px; background-color: var(--st-confirmed); border-radius: 50%; box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); animation: greenPulse 2s infinite;}
         @keyframes greenPulse { 70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); } 100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); } }
 
-        /* STATUS BADGES */
+        /* BADGES PASTEL */
+        .badge-baru { background-color: #E0F2FE; color: #0369A1; padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: inline-block;}
+        .badge-kontrol { background-color: #DCFCE7; color: #15803D; padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; display: inline-block;}
         .badge-status { padding: 5px 12px; border-radius: 20px; font-size: 0.65rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;}
         .badge-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
         .st-confirmed { background: #e6f8eb; color: var(--st-confirmed); } .st-confirmed::before { background: var(--st-confirmed); }
         .st-waiting { background: #fff5e6; color: var(--st-waiting); } .st-waiting::before { background: var(--st-waiting); }
         .st-cancelled { background: #ffe6e6; color: var(--st-cancelled); text-decoration: line-through; opacity: 0.7;} .st-cancelled::before { background: var(--st-cancelled); }
-        .st-completed { background: #eef5f5; color: var(--st-completed); } .st-completed::before { background: var(--st-completed); }
 
         /* CALENDAR */
+        .cal-header-box { background-color: #E0F2FE; padding: 12px 20px; border-radius: 15px; margin-bottom: 15px; }
         .cal-grid { display: grid !important; grid-template-columns: repeat(7, 1fr) !important; text-align: center; gap: 8px 0; }
         .cal-day { font-size: 0.75rem; color: var(--text-dark); font-weight: 700; margin-bottom: 5px;}
         .cal-num { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: 600; border-radius: 50%; margin: 0 auto; font-size: 0.8rem; cursor: pointer; color: var(--text-dark);}
-        .cal-num.active { background: var(--primary-teal); color: white; box-shadow: 0 5px 10px rgba(56, 200, 230, 0.3); }
+        @keyframes scalePop { 0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        .cal-num.active { background: var(--primary-teal); color: white; box-shadow: 0 5px 10px rgba(56, 200, 230, 0.3); animation: scalePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;}
         .cal-num:hover:not(.active) { background: #f1f4f9; }
 
-        /* AVAILABLE TIME SLOTS */
-        .slot-box {
-            border: 1px dashed #d1e5e5; padding: 12px; border-radius: 12px; text-align: center;
-            font-size: 0.8rem; font-weight: 600; color: var(--primary-teal); cursor: pointer; transition: 0.2s;
+        /* TIME SLOTS */
+        .slot-box { 
+            border: 1px solid rgba(56, 200, 230, 0.3); 
+            background-color: #F8FAFC; 
+            border-radius: 15px; 
+            padding: 15px 20px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px;
         }
-        .slot-box:hover { background: var(--primary-teal); color: white; border-style: solid; }
+        .slot-time { font-size: 1.15rem; font-weight: 700; color: var(--primary-teal); }
+        .slot-sisa { background-color: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 5px 15px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+        .slot-box:hover { border-color: var(--primary-teal); box-shadow: 0 8px 20px rgba(56, 200, 230, 0.15); background-color: white;}
+
+        /* MENU PASIEN SPESIFIK & FORM TEXTAREA */
+        .queue-item-pasien { border: 1px solid #e2e8f0; transition: 0.2s; }
+        .queue-item-pasien:hover { border-color: var(--primary-teal); background-color: #f8fafc; }
+        .queue-item-pasien.active { background-color: #E0F2FE; border-color: var(--primary-teal); }
         
-        /* DROPDOWN NOTIF */
-        .dropdown-menu-notif { width: 320px; padding: 0; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 15px; overflow: hidden;}
-        .notif-item { padding: 15px; border-bottom: 1px solid #f1f4f9; display: flex; gap: 15px; align-items: flex-start; cursor: pointer; transition: 0.2s;}
-        .notif-item:hover { background: #f8f9fa; }
+        .form-emr { 
+            background-color: #f8fafc; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 12px; 
+            padding: 12px 15px; 
+            font-size: 0.85rem; 
+            color: #334155; 
+            width: 100%; 
+            outline: none; 
+            transition: 0.2s;
+            resize: none; 
+        }
+        .form-emr::placeholder { color: #64748B; }
+        .form-emr:focus { border-color: var(--primary-teal); box-shadow: 0 0 0 3px rgba(56, 200, 230, 0.1); background-color: white;}
+        
+        .table-header-pastel { background-color: #F1F5F9 !important; }
+        .detail-tag { background: #F8FAFC; border: 1px solid #E2E8F0; padding: 4px 12px; border-radius: 20px; font-weight: 600; color: #475569; }
+        .detail-tag-primary { background: #E0F2FE; border: 1px solid #bae6fd; padding: 4px 12px; border-radius: 20px; font-weight: 700; color: var(--primary-teal); }
+        
+        .btn-action-panggil { color: #0284c7; border-color: #bae6fd; background-color: white; }
+        .btn-action-panggil:hover { background-color: #0284c7; color: white; }
+        .btn-action-skip { color: #d97706; border-color: #fde68a; background-color: white; }
+        .btn-action-skip:hover { background-color: #d97706; color: white; }
+        .btn-riwayat { transition: all 0.2s; }
+        .btn-riwayat:hover { background-color: var(--primary-teal) !important; color: white !important; border-color: var(--primary-teal) !important; }
+
+        /* CSS KHUSUS HALAMAN MANAJEMEN JADWAL */
+        .legend-indicator { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+        
+        .time-grid-container { display: flex; flex-direction: column; gap: 5px; margin-top: 20px; padding-bottom: 20px;}
+        .time-row { display: flex; gap: 15px; align-items: stretch; min-height: 65px; position: relative;}
+        .time-label { width: 70px; font-weight: 700; color: #94a3b8; font-size: 0.85rem; text-align: right; padding-top: 15px; flex-shrink: 0; }
+        
+        .time-content { flex: 1; border-top: 1px dashed #cbd5e1; position: relative; padding: 5px 0; }
+        
+        .schedule-block { 
+            padding: 12px 18px; border-radius: 12px; font-size: 0.85rem; font-weight: 600; 
+            cursor: pointer; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            display: flex; justify-content: space-between; align-items: center;
+            width: 100%; border-left: 5px solid; 
+        }
+        .schedule-block:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.08); filter: brightness(0.95);}
+        
+        .sch-terjadwal { background-color: #fef9c3; color: #b45309; border-left-color: #f59e0b; }
+        .sch-hadir { background-color: #e0f2fe; color: #0369a1; border-left-color: #0ea5e9; }
+        .sch-selesai { background-color: #dcfce7; color: #15803d; border-left-color: #22c55e; }
+        .sch-batal { background-color: #fee2e2; color: #b91c1c; border-left-color: #ef4444; text-decoration: line-through; opacity: 0.7;}
+        
+        .sch-blokir { 
+            background: repeating-linear-gradient(45deg, #f8fafc, #f8fafc 10px, #e2e8f0 10px, #e2e8f0 20px); 
+            color: #64748b; border: 1px solid #cbd5e1; border-left: 1px solid #cbd5e1; 
+            justify-content: center; cursor: not-allowed;
+        }
+        .sch-blokir:hover { transform: none; box-shadow: none; filter: none;}
     </style>
 </head>
 <body>
@@ -277,7 +340,13 @@
                     <i class="bi bi-search text-muted"></i>
                     <input type="text" placeholder="Search patient or appointment...">
                 </div>
-                <div class="header-icons d-flex">
+                <div class="header-icons d-flex align-items-center">
+                    
+                    <div class="me-3 px-3 py-2 bg-white rounded-pill shadow-sm d-flex align-items-center" style="box-shadow: 0px 4px 15px rgba(149, 157, 165, 0.1) !important;">
+                        <i class="bi bi-clock text-primary me-2" style="font-size: 0.9rem;"></i>
+                        <span id="realtime-clock" class="fw-bold text-dark" style="font-size: 0.8rem; letter-spacing: 0.5px;">--:-- WIB</span>
+                    </div>
+
                     <div class="dropdown">
                         <button class="icon-btn" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-bell-fill"></i>
@@ -289,165 +358,446 @@
                                 <div class="bg-danger bg-opacity-10 text-danger p-2 rounded-circle"><i class="bi bi-calendar-x-fill"></i></div>
                                 <div><h6 class="small fw-bold mb-1 text-dark">Patient Cancelled</h6><p class="mb-0 text-muted" style="font-size:0.7rem;">Sarah cancelled her 15:00 appointment.</p></div>
                             </li>
-                            <li class="notif-item">
-                                <div class="bg-success bg-opacity-10 text-success p-2 rounded-circle"><i class="bi bi-calendar-plus-fill"></i></div>
-                                <div><h6 class="small fw-bold mb-1 text-dark">New Schedule</h6><p class="mb-0 text-muted" style="font-size:0.7rem;">Kevin booked a slot for tomorrow 10:00 AM.</p></div>
-                            </li>
                         </ul>
                     </div>
-                    <div class="d-flex align-items-center ms-3 bg-white p-2 pe-3 rounded-pill shadow-sm cursor-pointer border" onclick="switchView('view-settings', document.querySelectorAll('.nav-item')[4])">
-                        <img src="https://ui-avatars.com/api/?name=Dr+Goyounjung&background=eef5f5&color=38c8e6" class="rounded-circle me-2" width="30">
+                    
+                    <div class="d-flex align-items-center ms-3 bg-white p-2 pe-3 rounded-pill shadow-sm cursor-pointer border-0" onclick="switchView('view-settings', document.querySelectorAll('.nav-item')[4])" style="box-shadow: 0px 4px 15px rgba(149, 157, 165, 0.1) !important;">
+                        <img src="../../images/wallpaper/rs9.png" class="rounded-circle me-2" width="32" height="32" style="object-fit: cover; object-position: top; background: #eef5f5;" alt="Dr. Goyounjung" onerror="this.src='https://ui-avatars.com/api/?name=Dr+Goyounjung&background=eef5f5&color=38c8e6'">
                         <span class="fw-bold small text-dark">Dr. Goyounjung</span>
                     </div>
                 </div>
             </div>
 
-            <div id="view-dashboard" class="view-section h-100">
-                <div class="row g-4 h-100">
-                    
-                    <div class="col-xl-8 col-lg-7 d-flex flex-column gap-4">
+            <div id="view-dashboard" class="view-section">
+                <div class="container-fluid p-0">
+                    <div class="row g-4">
                         
-                        <div class="welcome-banner">
-                            <div class="banner-text">
-                                <div class="banner-badge"><i class="bi bi-calendar-check me-2"></i>Apr 13, 2026</div>
-                                <h2 class="fw-bold mb-1">Hello, Dr. Goyounjung</h2>
-                                <p class="mb-0 opacity-75 small">You have 5 appointments scheduled today.</p>
-                            </div>
+                        <div class="col-xl-8 col-lg-7 d-flex flex-column">
                             
-                            <div class="hero-doctor-wrapper">
-                                <div class="bubble-hallo">Hallo, Dokter</div>
-                                <img src="../../images/wallpaper/rs9.png" class="wel-doctor-img" alt="Doctor" onerror="this.src='https://cdni.iconscout.com/illustration/premium/thumb/female-doctor-4985226-4155163.png'">
-                            </div>
-                        </div>
+                            <div class="welcome-banner">
+                                <div class="banner-pattern-mask">
+                                    <div class="banner-bg-shapes">
+                                        <i class="bi bi-heart-pulse"></i><i class="bi bi-capsule"></i><i class="bi bi-droplet"></i><i class="bi bi-activity"></i><i class="bi bi-virus"></i><i class="bi bi-thermometer-half"></i><i class="bi bi-pills"></i><i class="bi bi-clipboard2-pulse"></i><i class="bi bi-bandaid"></i><i class="bi bi-heart"></i>
+                                        <i class="bi bi-lungs"></i><i class="bi bi-prescription2"></i><i class="bi bi-hospital"></i><i class="bi bi-file-medical"></i><i class="bi bi-heart-pulse"></i><i class="bi bi-capsule"></i><i class="bi bi-droplet"></i><i class="bi bi-activity"></i><i class="bi bi-virus"></i><i class="bi bi-thermometer-half"></i>
+                                        <i class="bi bi-pills"></i><i class="bi bi-clipboard2-pulse"></i><i class="bi bi-bandaid"></i><i class="bi bi-heart"></i><i class="bi bi-lungs"></i><i class="bi bi-prescription2"></i><i class="bi bi-hospital"></i><i class="bi bi-file-medical"></i><i class="bi bi-heart-pulse"></i><i class="bi bi-capsule"></i>
+                                        <i class="bi bi-droplet"></i><i class="bi bi-activity"></i><i class="bi bi-virus"></i><i class="bi bi-thermometer-half"></i><i class="bi bi-pills"></i><i class="bi bi-clipboard2-pulse"></i><i class="bi bi-bandaid"></i><i class="bi bi-heart"></i><i class="bi bi-lungs"></i><i class="bi bi-prescription2"></i>
+                                    </div>
+                                </div>
 
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-5 d-flex flex-column gap-2">
-                                <button class="quick-btn btn-add"><i class="bi bi-calendar-plus"></i> Add Schedule</button>
-                                <button class="quick-btn btn-block"><i class="bi bi-clock"></i> Block Time</button>
-                                <button class="quick-btn btn-cancel"><i class="bi bi-calendar-x"></i> Cancel Appointment</button>
+                                <div class="banner-text animate-slide-left">
+                                    <div class="banner-badge"><i class="bi bi-calendar-check me-2"></i>17 Mei 2026</div>
+                                    <h2 class="fw-bold mb-1">Hello, Dr. Goyounjung!</h2>
+                                    <p class="mb-0 opacity-75 small">You have 5 appointments scheduled today.</p>
+                                    
+                                    <div class="mt-3 pt-3 border-top border-light border-opacity-25 d-flex align-items-center gap-3">
+                                        <span class="small text-white opacity-100 d-flex align-items-center gap-1" style="font-size: 0.75rem;">
+                                            <span class="pulse-dot-bright me-2"></span> Sistem Sinkronisasi: Aktif
+                                        </span>
+                                        <span class="small text-white opacity-100 d-flex align-items-center gap-1" style="font-size: 0.75rem;">
+                                            <i class="bi bi-cloud-sun me-1"></i> Semarang, 17 Mei 2026 | Sesi Sore
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="hero-doctor-wrapper" id="hero-doctor-trigger">
+                                    <div id="doctor-pesta-container" class="pesta-container" style="z-index: 1;"></div>
+                                    
+                                    <div class="bubble-hallo" style="z-index: 15;">Hallo, Dokter! 👋</div>
+                                    <img src="../../images/wallpaper/rs9.png" class="wel-doctor-img" alt="Doctor" style="z-index: 10;" onerror="this.src='https://cdni.iconscout.com/illustration/premium/thumb/female-doctor-4985226-4155163.png'">
+                                </div>
                             </div>
-                            
-                            <div class="col-md-7">
-                                <div class="next-patient-card h-100 d-flex flex-column justify-content-center">
-                                    <div class="d-flex justify-content-between align-items-start mb-2">
-                                        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-bold" style="font-size: 0.6rem;">NEXT PATIENT</span>
-                                        <div class="pulse-dot"></div>
+
+                            <div class="d-flex gap-3 mb-4 flex-wrap">
+                                <div class="counter-card flex-fill">
+                                    <div class="counter-icon bg-primary text-white"><i class="bi bi-people-fill"></i></div>
+                                    <div><div class="counter-number">5</div><div class="counter-label">Pasien Hari Ini</div></div>
+                                </div>
+                                <div class="counter-card flex-fill">
+                                    <div class="counter-icon bg-info bg-opacity-10 text-info"><i class="bi bi-display"></i></div>
+                                    <div><div class="counter-number text-primary">3</div><div class="counter-label">Konsultasi Baru</div></div>
+                                </div>
+                                <div class="counter-card flex-fill">
+                                    <div class="counter-icon bg-success bg-opacity-10 text-success"><i class="bi bi-arrow-repeat"></i></div>
+                                    <div><div class="counter-number">2</div><div class="counter-label">Jadwal Kontrol</div></div>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-5">
+                                    <div class="quick-actions-container">
+                                        <button class="quick-btn btn-add m-0" onclick="triggerConflictSimulation()"><i class="bi bi-calendar-plus"></i> Buka Slot Praktek</button>
+                                        <button class="quick-btn btn-block m-0"><i class="bi bi-clock"></i> Atur Istirahat / Cuti</button>
+                                        <button class="quick-btn btn-cancel m-0"><i class="bi bi-calendar-x"></i> Ajukan Reschedule</button>
                                     </div>
-                                    <h4 class="fw-bold text-dark mb-1 mt-2">Michael Jordan</h4>
-                                    <div class="d-flex justify-content-between align-items-end mt-3">
-                                        <div>
-                                            <p class="small text-muted mb-1"><i class="bi bi-clock me-1"></i> 09:00 AM</p>
-                                            <p class="small text-muted mb-0"><i class="bi bi-paperclip me-1"></i> Skin Allergy</p>
+                                </div>
+                                
+                                <div class="col-md-7">
+                                    <div class="next-patient-card">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span class="fw-bold text-dark opacity-50" style="font-size: 0.75rem; letter-spacing: 1px;">ANTREAN SEKARANG</span>
+                                            <div class="pulse-dot"></div>
                                         </div>
-                                        <button class="btn btn-primary btn-sm rounded-pill px-4 fw-bold">View Details</button>
+                                        <h4 class="fw-bold text-dark mb-1 mt-1">Michael Jordan</h4>
+                                        <div class="d-flex justify-content-between align-items-end mt-3">
+                                            <div>
+                                                <p class="small text-muted mb-1"><i class="bi bi-clock me-1"></i> 09:00 AM</p>
+                                                <p class="small text-muted mb-0"><i class="bi bi-paperclip me-1"></i> Skin Allergy</p>
+                                            </div>
+                                            <button class="btn btn-sm btn-teal rounded-pill px-4 shadow-sm mb-1 me-2" style="font-size: 0.75rem; font-weight: 600;" onclick="periksaPasien('MJ', 'Michael Jordan', 'Skin Allergy', 'Konsultasi Baru')">Periksa</button>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="med-card flex-grow-1 mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="fw-bold text-dark text-uppercase" style="font-size: 0.9rem;">Today Schedule</span>
+                                    <span class="badge bg-light text-dark border">Total: 5</span>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="text-muted small border-bottom">
+                                            <tr><th class="py-3">TIME</th><th class="py-3">PATIENT NAME</th><th class="py-3">KATEGORI</th><th class="py-3">REASON</th><th class="py-3">STATUS</th><th class="py-3 text-center">ACTION</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold text-dark py-3">09:00</td>
+                                                <td><div class="d-flex align-items-center"><div class="bg-light text-muted fw-bold rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 35px; height: 35px; font-size: 0.75rem;">MJ</div><span class="fw-bold text-dark small">Michael Jordan</span></div></td>
+                                                <td><span class="badge-baru">Konsultasi Baru</span></td>
+                                                <td class="small text-muted" style="min-width: 120px; white-space: normal;">Skin Allergy</td>
+                                                <td><span class="badge-status st-waiting">Waiting</span></td>
+                                                <td class="text-center"><button class="btn btn-sm btn-teal rounded-pill px-4 shadow-sm" style="font-size: 0.75rem; font-weight: 600;" onclick="periksaPasien('MJ', 'Michael Jordan', 'Skin Allergy', 'Konsultasi Baru')">Periksa</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold text-dark py-3">10:30</td>
+                                                <td><div class="d-flex align-items-center"><div class="bg-light text-muted fw-bold rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 35px; height: 35px; font-size: 0.75rem;">SC</div><span class="fw-bold text-dark small">Sarah Connor</span></div></td>
+                                                <td><span class="badge-kontrol">Kontrol</span></td>
+                                                <td class="small text-muted" style="min-width: 120px; white-space: normal;">Routine Check</td>
+                                                <td><span class="badge-status st-confirmed">Confirmed</span></td>
+                                                <td class="text-center"><button class="btn btn-sm btn-teal rounded-pill px-4 shadow-sm" style="font-size: 0.75rem; font-weight: 600;" onclick="periksaPasien('SC', 'Sarah Connor', 'Routine Check', 'Kontrol')">Periksa</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold text-dark py-3">13:00</td>
+                                                <td><div class="d-flex align-items-center"><div class="bg-light text-muted fw-bold rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 35px; height: 35px; font-size: 0.75rem;">KH</div><span class="fw-bold text-dark small">Kevin Hart</span></div></td>
+                                                <td><span class="badge-kontrol">Kontrol</span></td>
+                                                <td class="small text-muted" style="min-width: 120px; white-space: normal;">Dermatitis</td>
+                                                <td><span class="badge-status st-confirmed">Confirmed</span></td>
+                                                <td class="text-center"><button class="btn btn-sm btn-teal rounded-pill px-4 shadow-sm" style="font-size: 0.75rem; font-weight: 600;" onclick="periksaPasien('KH', 'Kevin Hart', 'Dermatitis', 'Kontrol')">Periksa</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="med-card flex-grow-1 mb-3">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="fw-bold text-dark text-uppercase" style="font-size: 0.9rem;">Today Schedule</span>
-                                <span class="badge bg-light text-dark border">Total: 5</span>
+                        <div class="col-xl-4 col-lg-5 d-flex flex-column gap-3 h-100">
+                            
+                            <div class="med-card pb-3">
+                                <div class="d-flex justify-content-between align-items-center cal-header-box mb-4">
+                                    <h6 class="fw-bold mb-0 text-primary">Mei 2026</h6>
+                                    <div class="d-flex gap-2"><i class="bi bi-chevron-left text-primary cursor-pointer"></i><i class="bi bi-chevron-right text-primary cursor-pointer"></i></div>
+                                </div>
+                                <div class="cal-grid"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
+                                <div class="cal-grid mt-2">
+                                    <div class="cal-num text-muted">27</div><div class="cal-num text-muted">28</div><div class="cal-num text-muted">29</div><div class="cal-num text-muted">30</div><div class="cal-num">1</div><div class="cal-num">2</div><div class="cal-num">3</div>
+                                    <div class="cal-num">4</div><div class="cal-num">5</div><div class="cal-num">6</div><div class="cal-num">7</div><div class="cal-num">8</div><div class="cal-num">9</div><div class="cal-num">10</div>
+                                    <div class="cal-num">11</div><div class="cal-num">12</div><div class="cal-num">13</div><div class="cal-num">14</div><div class="cal-num">15</div><div class="cal-num">16</div>
+                                    <div class="cal-num active position-relative">17<span class="position-absolute top-0 start-100 translate-middle rounded-circle border border-white" style="width: 10px; height: 10px; background-color: var(--st-confirmed);"></span></div>
+                                    <div class="cal-num">18</div><div class="cal-num">19</div><div class="cal-num">20</div><div class="cal-num">21</div><div class="cal-num">22</div><div class="cal-num">23</div><div class="cal-num">24</div>
+                                    <div class="cal-num">25</div><div class="cal-num">26</div><div class="cal-num">27</div><div class="cal-num">28</div><div class="cal-num">29</div><div class="cal-num">30</div><div class="cal-num">31</div>
+                                </div>
                             </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover align-middle mb-0">
-                                    <thead class="text-muted small border-bottom">
-                                        <tr>
-                                            <th class="py-3">TIME</th>
-                                            <th class="py-3">PATIENT NAME</th>
-                                            <th class="py-3">REASON</th>
-                                            <th class="py-3">STATUS</th>
-                                            <th class="py-3 text-center">ACTION</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="fw-bold text-dark py-3">09:00</td>
-                                            <td><div class="d-flex align-items-center"><div class="bg-light text-muted fw-bold rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 35px; height: 35px; font-size: 0.75rem;">MJ</div><span class="fw-bold text-dark small">Michael Jordan</span></div></td>
-                                            <td class="small text-muted">Skin Allergy</td>
-                                            <td><span class="badge-status st-waiting">Waiting</span></td>
-                                            <td class="text-center"><i class="bi bi-three-dots text-muted cursor-pointer"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bold text-dark py-3">10:30</td>
-                                            <td><div class="d-flex align-items-center"><div class="bg-light text-muted fw-bold rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 35px; height: 35px; font-size: 0.75rem;">SC</div><span class="fw-bold text-dark small">Sarah Connor</span></div></td>
-                                            <td class="small text-muted">Routine Check</td>
-                                            <td><span class="badge-status st-confirmed">Confirmed</span></td>
-                                            <td class="text-center"><i class="bi bi-three-dots text-muted cursor-pointer"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bold text-dark py-3">13:00</td>
-                                            <td><div class="d-flex align-items-center"><div class="bg-light text-muted fw-bold rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 35px; height: 35px; font-size: 0.75rem;">KH</div><span class="fw-bold text-dark small">Kevin Hart</span></div></td>
-                                            <td class="small text-muted">Dermatitis</td>
-                                            <td><span class="badge-status st-confirmed">Confirmed</span></td>
-                                            <td class="text-center"><i class="bi bi-three-dots text-muted cursor-pointer"></i></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bold text-muted text-decoration-line-through py-3">15:00</td>
-                                            <td><div class="d-flex align-items-center opacity-50"><div class="bg-light text-muted fw-bold rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 35px; height: 35px; font-size: 0.75rem;">BS</div><span class="fw-bold text-muted small">Budi S.</span></div></td>
-                                            <td class="small text-muted opacity-50">Acne Consult</td>
-                                            <td><span class="badge-status st-cancelled">Cancelled</span></td>
-                                            <td class="text-center"><i class="bi bi-trash text-danger cursor-pointer"></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+                            <div class="med-card flex-grow-1 d-flex flex-column mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="fw-bold text-dark mb-0">Available Today</h6>
+                                    <i class="bi bi-calendar-event text-primary"></i>
+                                </div>
+                                <p class="small text-muted mb-4" style="font-size: 0.75rem;">Klik slot untuk menambahkan jadwal pasien baru secara manual.</p>
+                                
+                                <div class="d-flex flex-column gap-3 overflow-auto pe-2">
+                                    <div class="slot-box" onclick="triggerBlockSmartSimulation()">
+                                        <div class="slot-time"><i class="bi bi-clock me-1"></i> 08:00 - 09:00</div>
+                                        <span class="badge-kontrol"><i class="bi bi-arrow-repeat"></i> Khusus Kontrol</span>
+                                        <span class="slot-sisa shadow-sm">2 Slot Tersisa</span>
+                                    </div>
+                                    <div class="slot-box">
+                                        <div class="slot-time"><i class="bi bi-clock me-1"></i> 11:00 - 12:00</div>
+                                        <span class="badge-baru"><i class="bi bi-chat-text"></i> Konsultasi Umum</span>
+                                        <span class="slot-sisa shadow-sm">1 Slot Tersisa</span>
+                                    </div>
+                                    <div class="slot-box">
+                                        <div class="slot-time"><i class="bi bi-clock me-1"></i> 14:00 - 15:00</div>
+                                        <span class="badge-kontrol"><i class="bi bi-arrow-repeat"></i> Khusus Kontrol</span>
+                                        <span class="slot-sisa shadow-sm">3 Slot Tersisa</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-pasien" class="view-section d-none h-100 flex-column">
+                <div class="row g-4 h-100">
+                    
+                    <div class="col-lg-4 col-xl-3 d-flex flex-column h-100">
+                        <div class="med-card flex-grow-1 d-flex flex-column overflow-hidden position-relative">
+                            <h6 class="fw-bold text-dark mb-4 border-bottom pb-3"><i class="bi bi-list-task me-2 text-primary"></i> Antrean Hari Ini</h6>
+                            
+                            <div class="overflow-auto pe-2 d-flex flex-column gap-3 mb-4">
+                                <div id="queue-MJ" class="queue-item-pasien p-3 rounded-4 cursor-pointer d-flex align-items-center gap-3" onclick="periksaPasien('MJ', 'Michael Jordan', 'Skin Allergy', 'Konsultasi Baru')">
+                                    <div class="bg-primary text-white fw-bold rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px; font-size: 0.8rem;">MJ</div>
+                                    <div>
+                                        <div class="fw-bold text-dark mb-1" style="font-size: 0.85rem;">Michael Jordan</div>
+                                        <div class="small text-muted fw-bold" style="font-size: 0.65rem;"><i class="bi bi-clock me-1"></i>09:00 AM</div>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <div class="text-info mb-1" style="font-size: 0.8rem;" title="RSVP Terkonfirmasi"><i class="bi bi-check-all"></i></div>
+                                        <span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25" style="font-size: 0.55rem;">Di Ruangan</span>
+                                    </div>
+                                </div>
+                                
+                                <div id="queue-SC" class="queue-item-pasien p-3 rounded-4 cursor-pointer d-flex align-items-center gap-3 opacity-75" onclick="periksaPasien('SC', 'Sarah Connor', 'Routine Check', 'Kontrol')">
+                                    <div class="fw-bold rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px; font-size: 0.8rem; background-color: #E0F7FA; color: #00838F;">SC</div>
+                                    <div>
+                                        <div class="fw-bold text-dark mb-1" style="font-size: 0.85rem;">Sarah Connor</div>
+                                        <div class="small fw-bold" style="font-size: 0.65rem; color: var(--st-waiting);"><i class="bi bi-clock me-1"></i>10:30 AM</div>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <div class="text-info mb-1" style="font-size: 0.8rem;"><i class="bi bi-check-all"></i></div>
+                                        <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 d-block mb-1" style="font-size: 0.55rem;">Hadir</span>
+                                        <small class="text-success fw-bold d-block" style="font-size: 0.55rem;">-30 mnt</small>
+                                    </div>
+                                </div>
+
+                                <div id="queue-KH" class="queue-item-pasien p-3 rounded-4 cursor-pointer d-flex align-items-center gap-3 opacity-50" onclick="periksaPasien('KH', 'Kevin Hart', 'Dermatitis', 'Kontrol')">
+                                    <div class="fw-bold rounded-circle d-flex justify-content-center align-items-center" style="width: 40px; height: 40px; font-size: 0.8rem; background-color: #f1f5f9; color: #64748b;">KH</div>
+                                    <div>
+                                        <div class="fw-bold text-dark mb-1" style="font-size: 0.85rem;">Kevin Hart</div>
+                                        <div class="small fw-bold text-muted" style="font-size: 0.65rem;"><i class="bi bi-clock me-1"></i>13:00 PM</div>
+                                    </div>
+                                    <div class="ms-auto text-end">
+                                        <div class="text-muted mb-1" style="font-size: 0.8rem;" title="RSVP Pending"><i class="bi bi-check"></i></div>
+                                        <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary border-opacity-25" style="font-size: 0.55rem;">Belum Hadir</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-auto border-top pt-3 pb-2 mb-2">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted fw-bold" style="font-size: 0.7rem;">Selesai Diperiksa</span>
+                                    <span class="badge bg-success bg-opacity-10 text-success">0 / 5</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted fw-bold" style="font-size: 0.7rem;">Estimasi Tunggu</span>
+                                    <span class="small text-warning fw-bold" style="font-size: 0.7rem;">~15 Menit</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xl-4 col-lg-5 d-flex flex-column gap-4">
+                    <div class="col-lg-8 col-xl-9 d-flex flex-column h-100">
                         
-                        <div class="med-card">
-                            <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
-                                <h6 class="fw-bold mb-0 text-dark">April 2026</h6>
-                                <div class="d-flex gap-2"><i class="bi bi-chevron-left text-muted cursor-pointer"></i><i class="bi bi-chevron-right text-muted cursor-pointer"></i></div>
+                        <div id="pasien-empty-state" class="med-card flex-grow-1 d-flex justify-content-center align-items-center flex-column h-100">
+                            <div class="rounded-circle d-flex justify-content-center align-items-center mb-4" style="width: 110px; height: 110px; background-color: #e0f2fe; border: 2px dashed var(--primary-teal);">
+                                <i class="bi bi-folder-plus text-primary" style="font-size: 3.5rem;"></i>
                             </div>
-                            <div class="cal-grid"><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span></div>
-                            <div class="cal-grid mt-2">
-                                <div class="cal-num text-muted">30</div><div class="cal-num text-muted">31</div><div class="cal-num">1</div><div class="cal-num">2</div><div class="cal-num">3</div><div class="cal-num">4</div><div class="cal-num">5</div>
-                                <div class="cal-num">6</div><div class="cal-num">7</div><div class="cal-num">8</div><div class="cal-num">9</div><div class="cal-num">10</div><div class="cal-num">11</div><div class="cal-num">12</div>
-                                <div class="cal-num active position-relative">13<span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning rounded-circle border border-white"></span></div>
-                                <div class="cal-num">14</div><div class="cal-num">15</div><div class="cal-num">16</div><div class="cal-num">17</div><div class="cal-num">18</div><div class="cal-num">19</div>
-                                <div class="cal-num">20</div><div class="cal-num">21</div><div class="cal-num">22</div><div class="cal-num">23</div><div class="cal-num">24</div><div class="cal-num">25</div><div class="cal-num">26</div>
+                            <h4 class="text-dark fw-bold mb-2">Rekam Medis Pasien</h4>
+                            <p class="text-muted small text-center" style="max-width: 380px;">Silakan pilih pasien dari daftar antrean di sebelah kiri untuk melihat detail dan mengisi rekam medis.</p>
+                        </div>
+
+                        <div id="pasien-active-state" class="med-card flex-grow-1 overflow-auto position-relative pb-3 d-none">
+                            
+                            <div class="d-flex align-items-center gap-4 mb-3 border-bottom pb-3">
+                                <img src="https://ui-avatars.com/api/?name=Michael+Jordan&background=eef5f5&color=38c8e6" id="emr-avatar" class="rounded-circle shadow-sm" width="80" height="80">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start mb-1">
+                                        <h3 class="fw-bold text-dark mb-0" id="emr-name">Michael Jordan</h3>
+                                        <div class="d-flex gap-2">
+                                            <button class="btn btn-sm btn-action-skip rounded-pill fw-bold border px-3" style="font-size: 0.7rem;"><i class="bi bi-skip-forward-fill me-1"></i>Lewati</button>
+                                            <button class="btn btn-sm btn-action-panggil rounded-pill fw-bold border px-3" style="font-size: 0.7rem;"><i class="bi bi-megaphone-fill me-1"></i>Panggil</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-end mt-2">
+                                        <div class="small d-flex gap-2 align-items-center" style="font-size: 0.75rem;">
+                                            <span class="badge bg-secondary bg-opacity-10 text-secondary border px-2 py-1">RM: 1992-04-X4</span>
+                                            <span class="detail-tag"><i class="bi bi-person me-1"></i> Laki-laki, 32 Thn</span>
+                                            <span class="detail-tag"><i class="bi bi-droplet me-1"></i> Gol Darah: O+</span>
+                                            <span id="emr-kategori" class="detail-tag-primary"><i class="bi bi-tag me-1"></i> Konsultasi Baru</span>
+                                        </div>
+                                        <button class="btn btn-sm btn-light border text-primary fw-bold rounded-pill shadow-sm btn-riwayat px-3" style="font-size: 0.7rem;" onclick="triggerHistoryPopUpSim()"><i class="bi bi-clock-history me-1"></i>Riwayat Terakhir</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-danger bg-opacity-10 border border-danger border-opacity-25 rounded-3 p-3 mb-3 d-flex align-items-start gap-3">
+                                <i class="bi bi-exclamation-triangle-fill text-danger fs-4"></i>
+                                <div>
+                                    <h6 class="text-danger fw-bold mb-1" style="font-size: 0.85rem;">Peringatan Alergi!</h6>
+                                    <p class="text-danger mb-0 opacity-75" style="font-size: 0.75rem;" id="emr-alergi">Pasien memiliki riwayat alergi terhadap obat golongan <b>Penisilin</b> dan <b>makanan laut (Seafood)</b>.</p>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-bold text-dark mb-1" style="font-size: 0.85rem;">Keluhan Hari Ini (Anamnesis)</label>
+                                <textarea class="form-emr py-2" rows="2" placeholder="Ketikkan keluhan utama pasien..." id="emr-reason">Pasien mengeluhkan gatal-gatal kemerahan pada area kulit lengan setelah memakan udang tadi malam.</textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="fw-bold text-dark mb-1" style="font-size: 0.85rem;">Diagnosa Kerja (ICD-10)</label>
+                                <textarea class="form-emr py-2" rows="1" placeholder="Ketikkan hasil diagnosa dokter..."></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="fw-bold text-dark mb-0" style="font-size: 0.85rem;">Resep Obat (E-Prescription)</label>
+                                    <button class="btn btn-sm btn-light border text-primary fw-bold" style="font-size: 0.7rem;"><i class="bi bi-plus-lg me-1"></i>Tambah Obat</button>
+                                </div>
+                                <div class="table-responsive border rounded-3 overflow-hidden">
+                                    <table class="table table-borderless align-middle mb-0 text-center">
+                                        <thead class="table-header-pastel text-muted border-bottom" style="font-size: 0.7rem;">
+                                            <tr><th class="text-start ps-3 py-2">Nama Obat</th><th class="py-2">Dosis</th><th class="py-2">Jumlah</th><th class="py-2">Aksi</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-start ps-3"><input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold text-slate-700" value="Cetirizine 10mg Tab"></td>
+                                                <td><input type="text" class="form-control form-control-sm border-0 bg-transparent text-center text-slate-700" value="1 x 1 Hari"></td>
+                                                <td><input type="text" class="form-control form-control-sm border-0 bg-transparent text-center text-slate-700" value="10 Caps"></td>
+                                                <td><i class="bi bi-trash text-danger cursor-pointer"></i></td>
+                                            </tr>
+                                            <tr class="border-top">
+                                                <td class="text-start ps-3"><input type="text" class="form-control form-control-sm border-0 bg-transparent fw-bold" placeholder="Ketik nama obat..." style="color: #334155;"></td>
+                                                <td><input type="text" class="form-control form-control-sm border-0 bg-transparent text-center" placeholder="--" style="color: #334155;"></td>
+                                                <td><input type="text" class="form-control form-control-sm border-0 bg-transparent text-center" placeholder="--" style="color: #334155;"></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="text-end border-top pt-3 mt-1">
+                                <button class="btn btn-light border fw-bold me-2 px-4 py-2" style="font-size: 0.8rem;" onclick="resetPeriksa()">Batal</button>
+                                <button class="btn btn-success fw-bold px-4 py-2 shadow-sm" style="font-size: 0.8rem;" onclick="selesaiPeriksa()"><i class="bi bi-check-circle me-2"></i>Selesai & Simpan</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="view-jadwal" class="view-section d-none h-100 flex-column">
+                <div class="med-card flex-grow-1 d-flex flex-column h-100 pb-2">
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                        <div>
+                            <h4 class="fw-bold text-dark mb-2">Manajemen Jadwal</h4>
+                            <div class="d-flex align-items-center gap-3 text-muted" style="font-size: 0.75rem; font-weight: 600;">
+                                <span><span class="legend-indicator" style="background: #f59e0b;"></span> Terjadwal</span>
+                                <span><span class="legend-indicator" style="background: #0ea5e9;"></span> Check-in</span>
+                                <span><span class="legend-indicator" style="background: #22c55e;"></span> Selesai</span>
+                                <span><span class="legend-indicator" style="background: #ef4444;"></span> Batal</span>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex gap-3 align-items-center">
+                            <div class="btn-group shadow-sm">
+                                <button class="btn btn-teal btn-sm active fw-bold px-3">Harian</button>
+                                <button class="btn btn-light border btn-sm fw-bold text-muted px-3">Mingguan</button>
+                                <button class="btn btn-light border btn-sm fw-bold text-muted px-3">Bulanan</button>
+                            </div>
+                            
+                            <div class="d-flex gap-1 align-items-center bg-light border rounded-3 px-2 py-1 shadow-sm">
+                                <button class="btn btn-sm btn-light border-0 fw-bold"><i class="bi bi-chevron-left"></i></button>
+                                <span class="fw-bold text-dark px-2" style="font-size: 0.8rem;"><i class="bi bi-calendar-event me-2 text-primary"></i>17 Mei 2026</span>
+                                <button class="btn btn-sm btn-light border-0 fw-bold"><i class="bi bi-chevron-right"></i></button>
+                            </div>
+                            
+                            <div class="d-flex gap-2 ms-2">
+                                <button class="btn btn-danger shadow-sm fw-bold border-0" style="font-size: 0.75rem; padding: 8px 15px;" onclick="triggerBlockSmartSimulation()"><i class="bi bi-slash-circle me-1"></i> Tutup Slot</button>
+                                <button class="btn btn-teal shadow-sm fw-bold border-0" style="font-size: 0.75rem; padding: 8px 15px;" onclick="triggerConflictSimulation()"><i class="bi bi-plus-lg me-1"></i> Tambah Janji</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="time-grid-container overflow-auto flex-grow-1 pe-2">
+                        
+                        <div class="time-row">
+                            <div class="time-label">08:00</div>
+                            <div class="time-content d-flex flex-column gap-2">
+                                <div id="block-MJ" class="schedule-block sch-hadir" onclick="showJadwalDetail('Michael Jordan', '08:00 - 08:30', 'Skin Allergy', 'BPJS Kesehatan', 'Hadir (Check-in)', '07:45 WIB')">
+                                    <span>Michael Jordan <i class="bi bi-check-all text-info ms-1"></i></span>
+                                    <span>08:00 - 08:30</span>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="med-card flex-grow-1 d-flex flex-column mb-3">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <h6 class="fw-bold text-dark mb-0">Available Today</h6>
-                                <i class="bi bi-clock text-primary"></i>
+                        <div class="time-row">
+                            <div class="time-label">09:00</div>
+                            <div class="time-content d-flex flex-column gap-2">
+                                <div class="schedule-block sch-selesai w-75" onclick="showJadwalDetail('Sarah Connor', '09:30 - 10:00', 'Routine Check', 'Asuransi Swasta', 'Selesai', '09:00 WIB')">
+                                    <span>Sarah Connor <i class="bi bi-check-all text-info ms-1"></i></span>
+                                    <span>09:30 - 10:00</span>
+                                </div>
                             </div>
-                            <p class="small text-muted mb-4" style="font-size: 0.75rem;">Klik slot untuk menambahkan jadwal pasien baru secara manual.</p>
-                            
-                            <div class="d-flex flex-column gap-3 overflow-auto pe-2">
-                                <div class="slot-box">08:00 - 09:00</div>
-                                <div class="slot-box">11:00 - 12:00</div>
-                                <div class="slot-box">14:00 - 15:00</div>
-                                <div class="slot-box">16:00 - 17:00</div>
+                        </div>
+
+                        <div class="time-row">
+                            <div class="time-label">10:00</div>
+                            <div class="time-content d-flex flex-column gap-2">
+                                <div class="schedule-block sch-terjadwal w-50" onclick="showJadwalDetail('Kevin Hart', '10:00 - 10:30', 'Dermatitis', 'Pembayaran Pribadi', 'Terjadwal (Belum Datang)', 'Belum Tiba')">
+                                    <span>Kevin Hart <i class="bi bi-check text-muted ms-1"></i></span>
+                                    <span>10:00 - 10:30</span>
+                                </div>
                             </div>
+                        </div>
+
+                        <div class="time-row">
+                            <div class="time-label">11:00</div>
+                            <div class="time-content d-flex flex-column gap-2">
+                                <div class="schedule-block sch-batal" onclick="showJadwalDetail('Budi S.', '11:00 - 11:45', 'Acne Consult', 'BPJS Kesehatan', 'Batal', 'Dibatalkan')">
+                                    <span>Budi S.</span>
+                                    <span>11:00 - 11:45</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="time-row">
+                            <div class="time-label">12:00</div>
+                            <div class="time-content d-flex flex-column gap-2">
+                                <div class="schedule-block sch-blokir">
+                                    <i class="bi bi-cup-hot-fill me-2"></i> ISTIRAHAT MAKAN SIANG (SMART BLOCK ACTIVE)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="time-row">
+                            <div class="time-label">13:00</div>
+                            <div class="time-content"></div>
                         </div>
 
                     </div>
                 </div>
             </div>
 
-            <div id="view-pasien" class="view-section d-none h-100"><div class="med-card h-100 d-flex justify-content-center align-items-center flex-column"><i class="bi bi-people-fill text-muted mb-3" style="font-size: 3rem;"></i><h4 class="text-muted fw-bold">Database Pasien</h4></div></div>
-            <div id="view-jadwal" class="view-section d-none h-100"><div class="med-card h-100 d-flex justify-content-center align-items-center flex-column"><i class="bi bi-calendar-event text-muted mb-3" style="font-size: 3rem;"></i><h4 class="text-muted fw-bold">Manajemen Jadwal</h4></div></div>
-            <div id="view-riwayat" class="view-section d-none h-100"><div class="med-card h-100 d-flex justify-content-center align-items-center flex-column"><i class="bi bi-clock-history text-muted mb-3" style="font-size: 3rem;"></i><h4 class="text-muted fw-bold">Riwayat Konsultasi</h4></div></div>
+            <div id="view-riwayat" class="view-section d-none h-100"><div class="med-card h-100 d-flex justify-content-center align-items-center flex-column"><i class="bi bi-inbox" style="font-size: 4rem; color: #a0c4c4;"></i><h4 class="text-dark fw-bold mt-3 mb-2">Riwayat Konsultasi</h4><p class="text-muted small">History konsultasi yang sudah selesai atau dibatalkan.</p></div></div>
             
             <div id="view-settings" class="view-section d-none h-100 flex-column">
                 <div class="med-card flex-grow-1 p-4">
                     <h4 class="fw-bold mb-4 text-dark"><i class="bi bi-gear-fill me-2 text-primary"></i> Pengaturan Profil & Jam Kerja</h4>
                     <div class="row border-top pt-4">
                         <div class="col-md-3 text-center border-end">
-                            <img src="https://ui-avatars.com/api/?name=Istiak+Ahmed&background=eef5f5&color=38c8e6" class="rounded-circle mb-3 border border-4 border-white shadow-sm" width="120">
-                            <h6 class="fw-bold text-dark">Dr. Istiak Ahmed</h6>
+                            <img src="../../images/wallpaper/rs9.png" class="rounded-circle mb-3 border border-4 border-white shadow-sm" width="120" height="120" style="object-fit: cover; background: #eef5f5;" onerror="this.src='https://ui-avatars.com/api/?name=Dr+Goyounjung&background=eef5f5&color=38c8e6'">
+                            <h6 class="fw-bold text-dark">Dr. Goyounjung</h6>
                             <p class="small text-muted">Dermatologist</p>
                         </div>
                         <div class="col-md-9 ps-md-4">
                             <div class="row g-3 mb-4">
-                                <div class="col-md-6"><label class="small text-muted">Full Name</label><input type="text" class="form-control bg-light border-0" value="Dr. Istiak Ahmed"></div>
+                                <div class="col-md-6"><label class="small text-muted">Full Name</label><input type="text" class="form-control bg-light border-0" value="Dr. Goyounjung"></div>
                                 <div class="col-md-6"><label class="small text-muted">Specialization</label><input type="text" class="form-control bg-light border-0" value="Dermatologist"></div>
                             </div>
                             <h6 class="fw-bold text-muted text-uppercase mb-3 small border-top pt-3">Default Working Hours</h6>
@@ -455,7 +805,7 @@
                                 <div class="col-md-6"><label class="small text-muted">Working Hours Start</label><input type="time" class="form-control bg-light border-0" value="08:00"></div>
                                 <div class="col-md-6"><label class="small text-muted">Working Hours End</label><input type="time" class="form-control bg-light border-0" value="17:00"></div>
                             </div>
-                            <div class="text-end mt-4 pt-3 border-top"><button class="btn btn-primary px-5 py-2 rounded-pill text-white">Save Changes</button></div>
+                            <div class="text-end mt-4 pt-3 border-top"><button class="btn btn-teal px-5 py-2 rounded-pill text-white">Save Changes</button></div>
                         </div>
                     </div>
                 </div>
@@ -464,25 +814,206 @@
         </div> 
     </div>
 
+    <div class="modal fade" id="jadwalDetailModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0" style="border-radius: 20px;">
+                <div class="modal-header border-bottom-0 pb-0">
+                    <h5 class="fw-bold text-dark mb-0">Informasi Janji Temu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <img src="" id="modalAvatar" class="rounded-circle shadow-sm" width="60" height="60">
+                        <div>
+                            <div class="d-flex align-items-center gap-2">
+                                <h4 class="fw-bold text-dark mb-0" id="modalName">Nama Pasien</h4>
+                                <span id="modalRSVPIcon" class="text-info fs-5"></span>
+                            </div>
+                            <span class="badge mt-1" id="modalStatus">Status</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-light rounded-3 p-3 mb-3">
+                        <div class="row g-2">
+                            <div class="col-6 border-end">
+                                <p class="text-muted small mb-1 fw-bold">Waktu Temu</p>
+                                <p class="text-dark fw-bold mb-0" id="modalTime"><i class="bi bi-clock text-primary me-1"></i> --:--</p>
+                            </div>
+                            <div class="col-6 ps-3">
+                                <p class="text-muted small mb-1 fw-bold">Jam Check-In</p>
+                                <p class="text-dark fw-bold mb-0" id="modalCheckInTime"><i class="bi bi-geo-alt text-success me-1"></i> --:--</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-light rounded-3 p-3 mb-3">
+                        <p class="text-muted small mb-1 fw-bold">Metode Pembayaran</p>
+                        <p class="text-dark fw-bold mb-0" id="modalInsurance"><i class="bi bi-wallet2 text-primary me-1"></i> --</p>
+                    </div>
+
+                    <div class="mb-2">
+                        <p class="text-muted small mb-1 fw-bold">Keluhan Booking</p>
+                        <div class="border rounded-3 p-3 bg-white text-dark small" id="modalReason">--</div>
+                    </div>
+                </div>
+                <div class="modal-notif p-3 bg-light mx-3 rounded-3 d-flex justify-content-between align-items-center mb-3">
+                    <span class="small text-muted fw-bold"><i class="bi bi-sliders me-1 text-primary"></i> Atur Durasi / Jam Sesi</span>
+                    <div class="d-flex gap-1">
+                        <button class="btn btn-sm btn-outline-secondary px-2 py-0" onclick="alert('Durasi diperpanjang +15 Menit (Resize Berhasil)')" style="font-size:0.65rem;">+15m</button>
+                        <button class="btn btn-sm btn-outline-primary px-2 py-0" onclick="simulateDragDropReschedule()" style="font-size:0.65rem;">Geser Ke 10:00</button>
+                    </div>
+                </div>
+                <div class="modal-footer border-top-0 pt-0">
+                    <button type="button" class="btn btn-light fw-bold rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-teal fw-bold rounded-pill px-4" data-bs-dismiss="modal" onclick="switchView('view-pasien', document.querySelectorAll('.nav-item')[1])">Buka Rekam Medis</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../../js/script.js"></script>
     
     <script>
-        // LOGIC SPA
+        let activePatient = null; 
+
+        // 🔥 SIMULASI PENANGANAN PROTEKSI BENTROK (OVERLAP & CONFLICT) 🔥
+        function triggerConflictSimulation() {
+            alert("⚠️ MEDIFLOW VALIDATION SYSTEM ALERT:\n\nSistem mendeteksi bentrok jadwal! Slot ini sudah digunakan oleh pasien Michael Jordan (08:00 - 08:30).\n\nSilakan pilih waktu alternatif lain.");
+        }
+
+        // 🔥 SIMULASI SMART BLOCKING JADWAL ISTIRAHAT 🔥
+        function triggerBlockSmartSimulation() {
+            alert("🔒 SMART BLOCKING ACTIVE:\n\nSesi ini berada di dalam waktu Istirahat/Cuti Dokter Goyounjung (12:00 - 13:00).\n\nSistem secara otomatis menolak input booking janji temu baru.");
+        }
+
+        // 🔥 SIMULASI INTERAKSI DRAG & DROP/GESER JAM JADWAL 🔥
+        function simulateDragDropReschedule() {
+            // Tutup modal dulu
+            const modalEl = document.getElementById('jadwalDetailModal');
+            const modalInstance = bootstrap.Modal.getInstance(modalEl);
+            if(modalInstance) modalInstance.hide();
+
+            // Pindahkan blok Michael Jordan ke slot jam 10:00 secara visual
+            setTimeout(() => {
+                const block = document.getElementById('block-MJ');
+                if(block) {
+                    alert("🎯 INTERAKSI SIKLES: Michael Jordan Berhasil Digeser (Reschedule) ke Jam 10:00 AM.");
+                    // Reset posisi visual untuk demo halaman
+                    location.reload();
+                }
+            }, 400);
+        }
+
+        // 🔥 SIMULASI POP-UP RIWAYAT MEDIS SINGKAT 🔥
+        function triggerHistoryPopUpSim() {
+            alert("📋 REKAM MEDIS TERAKHIR - Michael Jordan (Kunjungan 10 Mei 2026):\n\n- Diagnosa: Dermatitis Kontak Alergi (L23.9)\n- Terapi: Hidrokortison Krim 1%, Cetirizine 10mg Tab.\n- Catatan Dokter: Ruam membaik, hindari pemicu seafood.");
+        }
+
         function switchView(viewId, element) {
-            document.querySelectorAll('.view-section').forEach(view => view.classList.add('d-none'));
-            document.getElementById(viewId).classList.remove('d-none');
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.add('d-none');
+            });
+            
+            if(viewId === 'view-pasien') {
+                document.getElementById('view-pasien').classList.remove('d-none');
+                
+                if(activePatient !== null) {
+                    document.getElementById('pasien-empty-state').classList.add('d-none');
+                    document.getElementById('pasien-active-state').classList.remove('d-none');
+                } else {
+                    document.getElementById('pasien-empty-state').classList.remove('d-none');
+                    document.getElementById('pasien-active-state').classList.add('d-none');
+                }
+            } else {
+                document.getElementById(viewId).classList.remove('d-none');
+            }
+
             document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
             if(element) element.classList.add('active');
         }
 
-        // LOGIC LOGOUT
+        function periksaPasien(id, name, reason, category) {
+            activePatient = { id: id, name: name, reason: reason, category: category };
+            document.getElementById('emr-name').textContent = name;
+            document.getElementById('emr-kategori').innerHTML = `<i class="bi bi-tag me-1"></i> ${category}`;
+            document.getElementById('emr-avatar').src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=eef5f5&color=38c8e6`;
+            document.getElementById('emr-reason').value = `Pasien mengeluhkan gejala terkait ${reason} sejak kemarin malam.`;
+            
+            document.querySelectorAll('.queue-item-pasien').forEach(el => {
+                el.classList.remove('active');
+                if(el.id !== 'queue-' + id) {
+                    el.classList.add('opacity-75'); 
+                }
+            }); 
+            
+            const activeQueue = document.getElementById('queue-' + id);
+            if(activeQueue) {
+                activeQueue.classList.remove('opacity-75', 'opacity-50');
+                activeQueue.classList.add('active');
+            }
+
+            switchView('view-pasien', document.querySelectorAll('.nav-item')[1]);
+        }
+
+        function resetPeriksa() {
+            activePatient = null;
+            document.querySelectorAll('.queue-item-pasien').forEach(el => el.classList.remove('active'));
+            switchView('view-pasien', document.querySelectorAll('.nav-item')[1]);
+        }
+
+        function selesaiPeriksa() {
+            alert('Rekam medis untuk ' + activePatient.name + ' berhasil disimpan!');
+            activePatient = null; 
+            switchView('view-dashboard', document.querySelectorAll('.nav-item')[0]); 
+        }
+
         function logout() {
             if(confirm('Apakah Anda yakin ingin keluar?')) {
                 document.body.style.transition = "opacity 0.5s ease";
                 document.body.style.opacity = "0";
                 setTimeout(() => { window.location.href = '../../index.html'; }, 500);
             }
+        }
+
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('realtime-clock').textContent = hours + ':' + minutes + ' WIB';
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); 
+
+        // 🔥 FUNGSI SHOW DETAIL JADWAL DENGAN FITUR RSVP & TRACKER TIBA 🔥
+        function showJadwalDetail(name, time, reason, insurance, statusText, checkInTime) {
+            document.getElementById('modalName').textContent = name;
+            document.getElementById('modalTime').innerHTML = `<i class="bi bi-clock text-primary me-1"></i> ` + time;
+            document.getElementById('modalCheckInTime').innerHTML = `<i class="bi bi-geo-alt text-success me-1"></i> ` + checkInTime;
+            document.getElementById('modalReason').textContent = reason;
+            document.getElementById('modalInsurance').innerHTML = `<i class="bi bi-wallet2 text-primary me-1"></i> ` + insurance;
+            document.getElementById('modalAvatar').src = `https://ui-avatars.com/api/?name=${name.replace(' ', '+')}&background=eef5f5&color=38c8e6`;
+            
+            // Set Ikon RSVP
+            const rsvpIcon = document.getElementById('modalRSVPIcon');
+            if(statusText.includes('Batal')) {
+                rsvpIcon.innerHTML = `<i class="bi bi-x-circle text-danger"></i>`;
+            } else if(statusText.includes('Terjadwal')) {
+                rsvpIcon.innerHTML = `<i class="bi bi-check text-muted" title="RSVP Pending"></i>`;
+            } else {
+                rsvpIcon.innerHTML = `<i class="bi bi-check-all text-info" title="RSVP Confirmed"></i>`;
+            }
+
+            let badgeClass = 'bg-secondary';
+            if(statusText.includes('Hadir')) badgeClass = 'bg-info text-white';
+            else if(statusText.includes('Selesai')) badgeClass = 'bg-success text-white';
+            else if(statusText.includes('Terjadwal')) badgeClass = 'bg-warning text-dark';
+            else if(statusText.includes('Batal')) badgeClass = 'bg-danger text-white';
+            
+            document.getElementById('modalStatus').className = `badge ${badgeClass}`;
+            document.getElementById('modalStatus').textContent = statusText;
+
+            const modal = new bootstrap.Modal(document.getElementById('jadwalDetailModal'));
+            modal.show();
         }
     </script>
 </body>
